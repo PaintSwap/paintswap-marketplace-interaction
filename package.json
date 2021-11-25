@@ -1,0 +1,31 @@
+{
+  "name": "paintswap-marketplace-interaction",
+  "version": "1.0.0",
+  "description": "Example code to interact with the Paintswap NFT marketplace",
+  "scripts": {
+    "listen": "npx ts-node index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaintSwap/paintswap-marketplace-interaction.git"
+  },
+  "keywords": [
+    "paintswap",
+    "nft",
+    "marketplace",
+    "web3",
+    "ts",
+    "js",
+    "nodejs"
+  ],
+  "author": "Paintswap Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaintSwap/paintswap-marketplace-interaction/issues"
+  },
+  "homepage": "https://github.com/PaintSwap/paintswap-marketplace-interaction",
+  "dependencies": {
+    "ethers": "^5.5.1",
+    "ts-node": "^10.4.0"
+  }
+}
