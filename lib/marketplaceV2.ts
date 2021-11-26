@@ -29,13 +29,23 @@ export class MarketplaceV2 {
     }
 
     #handleBundleSold(bundle: V2BundleSold, callback: (sale: V2Sold) => void): void {
-        for (let i = 0; i < bundle.nfts.length; ++i) {
+        const pieces = bundle.nfts.length
+
+        const totalAmountInEachBundle = bundle.amountBatches.reduce((a: ethers.BigNumber, b: ethers.BigNumber) => a.add(b))
+
+        // Bundles aren't used at the moment, so this loop will be for a single sale
+        for (let i = 0; i < pieces; ++i) {
+
+            // Price is for the *individual* NFT, so it's averaged taking into account the bundle composition and number of bundles sold
+            const bundleRatio = bundle.amountBatches[i].toNumber() / totalAmountInEachBundle.toNumber()
+            const price = bundle.price.mul(bundleRatio).div(bundle.amount)
+
             const sale: V2Sold = {
                 marketplaceId: bundle.marketplaceId,
                 collection: bundle.nfts[i],
                 tokenID: bundle.tokenIds[i],
                 amount: bundle.amount.mul(bundle.amountBatches[i]),
-                price: bundle.price,
+                price,
                 buyer: bundle.buyer,
                 seller: bundle.seller
             };
