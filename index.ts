@@ -2,7 +2,6 @@
 
 import { ethers } from "ethers"
 import MarketplaceV2 from "./lib/marketplaceV2"
-import { V2BundleSold, V2Sold } from "./lib/types";
 
 const provider = new ethers.providers.JsonRpcProvider(
     "https://rpc.ftm.tools/"
@@ -10,4 +9,10 @@ const provider = new ethers.providers.JsonRpcProvider(
 
 const marketplace = new MarketplaceV2(provider)
 
-marketplace.onSold(console.log)
+marketplace.onNewSale((sale) => {
+    console.log('New listing!\n', sale)
+})
+
+marketplace.onSold((sale) => {
+    console.log('Sold!\n', sale)
+})

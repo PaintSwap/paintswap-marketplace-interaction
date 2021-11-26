@@ -1,0 +1,48 @@
+import { BigNumber } from "ethers"
+
+export interface BundleBase {
+    marketplaceId: BigNumber
+    nfts: Array<string> // the collection
+    tokenIds: Array<BigNumber>
+    amountBatches: Array<BigNumber> // individual amounts within each bundle
+}
+
+export interface BundlePriced extends BundleBase {
+    amount: BigNumber
+    price: BigNumber
+}
+
+export interface Base {
+    marketplaceId: BigNumber
+    collection: string
+    tokenID: BigNumber
+    amountInBundle: BigNumber
+}
+
+export interface Priced extends Base {
+    amount: BigNumber
+    price: BigNumber
+}
+
+// A type describing a new listing
+interface NewSaleBase {
+    duration: BigNumber
+    isAuction: boolean
+    isNSFW: boolean
+}
+
+// A type describing a successful sale (e.g. direct buy, offer accepted or auction finished with a bid)
+interface SoldBase {
+    buyer: string
+    seller: string
+}
+
+export interface NewBundleSale extends BundlePriced, NewSaleBase {}
+
+// NewBundleSale splits into NewSale
+export interface NewSale extends Priced, NewSaleBase {}
+
+export interface BundleSold extends BundlePriced, SoldBase {}
+
+// BundleSold splits into Sold
+export interface Sold extends Priced, SoldBase {}
