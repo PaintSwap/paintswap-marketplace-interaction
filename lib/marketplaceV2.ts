@@ -11,7 +11,7 @@ export class MarketplaceV2 {
         this.contract = new ethers.Contract(address, MarketplaceV2ABI, provider)
     }
 
-    onSold(callback: (sale: V2Sold) => void): void {
+    #onSoldImpl(callback: (bundle: V2BundleSold) => void): void {
         this.contract.on("Sold", (marketplaceId, nfts, tokenIds, amountBatches, price, buyer, seller, amount, event) => {
             const bundle: V2BundleSold = {
                 marketplaceId,
@@ -23,12 +23,21 @@ export class MarketplaceV2 {
                 seller,
                 amount
             }
-
-            this.#handleBundleSold(bundle, callback)
+            callback(bundle)
         })
     }
 
-    #handleBundleSold(bundle: V2BundleSold, callback: (sale: V2Sold) => void): void {
+    onSoldAsBundle(callback: (sale: V2BundleSold) => void): void {
+        this.#onSoldImpl(callback)
+    }
+
+    onSold(callback: (sale: V2Sold) => void): void {
+        this.#onSoldImpl((bundle) => MarketplaceV2.splitBundleSold(bundle).forEach(callback))
+    }
+
+    static splitBundleSold(bundle: V2BundleSold): Array<V2Sold> {
+        const result = []
+
         const pieces = bundle.nfts.length
 
         const totalAmountInEachBundle = bundle.amountBatches.reduce((a: ethers.BigNumber, b: ethers.BigNumber) => a.add(b))
@@ -50,8 +59,10 @@ export class MarketplaceV2 {
                 seller: bundle.seller
             };
 
-            callback(sale)
+            result.push(sale)
         }
+
+        return result
     }
 }
 
