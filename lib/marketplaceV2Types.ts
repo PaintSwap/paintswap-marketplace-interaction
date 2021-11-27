@@ -62,14 +62,7 @@ export interface Unsold extends Base { }
 
 export interface BundlePriceUpdate {
     marketplaceId: BigNumber
-    nfts: Array<string> // the collections
-    tokenIds: Array<BigNumber>
-}
-
-export interface PriceUpdate {
-    marketplaceId: BigNumber,
-    collection: string
-    tokenID: BigNumber
+    price: BigNumber
 }
 
 // -----------
