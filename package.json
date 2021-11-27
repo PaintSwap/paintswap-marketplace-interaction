@@ -1,15 +1,13 @@
 {
-  "name": "paintswap-marketplace-interaction",
-  "version": "1.0.0",
+  "name": "@paintswap/marketplace-interactions",
+  "version": "0.1.0",
   "description": "Example code to interact with the Paintswap NFT marketplace",
-  "scripts": {
-    "listen": "npx ts-node listen.ts",
-    "query": "npx ts-node query.ts"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PaintSwap/paintswap-marketplace-interaction.git"
   },
+  "main": "dist/lib/marketplaceV2.js",
+  "types": "dist/lib/marketplaceV2.d.ts",
   "keywords": [
     "paintswap",
     "nft",
@@ -19,6 +17,25 @@
     "js",
     "nodejs"
   ],
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "listen": "npx ts-node listen.ts",
+    "query": "npx ts-node query.ts",
+    "build": "rm -rf ./dist/* && tsc",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn lint",
+    "preversion": "yarn lint",
+    "version": "yarn format:write && git add -A src",
+    "postversion": "git push && git push --tags",
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "format:check": "prettier --check --loglevel warn 'src/**/*.{js,jsx,ts,tsx}'",
+    "format:write": "run-script-os",
+    "format:write:windows": "prettier --write src/**/*.{js,jsx,ts,tsx}",
+    "format:write:default": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+    "format:check-files": "prettier --check --loglevel warn"
+  },
   "author": "Paintswap Team",
   "license": "ISC",
   "bugs": {
@@ -30,8 +47,16 @@
   },
   "devDependencies": {
     "@types/node": "^16.11.10",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.1",
+    "prettier": "^2.5.0",
+    "run-script-os": "^1.1.6",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
-    
   }
 }
