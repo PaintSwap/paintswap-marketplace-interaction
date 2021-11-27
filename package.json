@@ -1,6 +1,6 @@
 {
-  "name": "paintswap-marketplace-interaction",
-  "version": "1.0.0",
+  "name": "@paintswap-libs/marketplace-interactions",
+  "version": "0.1.0",
   "description": "Example code to interact with the Paintswap NFT marketplace",
   "repository": {
     "type": "git",
