@@ -16,3 +16,7 @@ marketplace.onNewSale((sale) => {
 marketplace.onSold((sale) => {
     console.log('Sold!\n', sale)
 })
+
+marketplace.onUnsold((sale) => {
+    console.log('Failed sale :(\n', sale)
+})

@@ -69,6 +69,10 @@ export class MarketplaceV2Utils {
             }
         })
     }
+
+    static splitBundleUnsold(bundle: V2.BundleUnsold): Array<V2.Unsold> {
+        return this.#splitBundleBase(bundle)
+    }
 }
 
 export class MarketplaceV2 {
@@ -111,6 +115,20 @@ export class MarketplaceV2 {
         })
     }
 
+    #onUnsoldImpl(callback: (bundle: V2.BundleUnsold) => void): void {
+        this.contract.on("SaleFinished", (marketplaceId, nfts, tokenIds, amountBatches, failedSellAll, event) => {
+            if (failedSellAll) {
+                const bundle: V2.BundleUnsold = {
+                    marketplaceId,
+                    nfts,
+                    tokenIds,
+                    amountBatches
+                }
+                callback(bundle)
+            }
+        })
+    }
+
     onNewSaleAsBundle(callback: (sale: V2.NewBundleSale) => void): void {
         this.#onNewSaleImpl(callback)
     }
@@ -125,6 +143,14 @@ export class MarketplaceV2 {
 
     onSold(callback: (sale: V2.Sold) => void): void {
         this.#onSoldImpl((bundle) => MarketplaceV2Utils.splitBundleSold(bundle).forEach(callback))
+    }
+
+    onUnsoldAsBundle(callback: (sale: V2.BundleUnsold) => void): void {
+        this.#onUnsoldImpl(callback)
+    }
+
+    onUnsold(callback: (sale: V2.Unsold) => void): void {
+        this.#onUnsoldImpl((bundle) => MarketplaceV2Utils.splitBundleUnsold(bundle).forEach(callback))
     }
 }
 
