@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Example code to interact with the Paintswap NFT marketplace",
   "scripts": {
-    "listen": "npx ts-node listen.ts"
+    "listen": "npx ts-node listen.ts",
+    "query": "npx ts-node query.ts"
   },
   "repository": {
     "type": "git",

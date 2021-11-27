@@ -228,6 +228,29 @@ export class MarketplaceV2 {
     onNewOffer(callback: (offer: V2.NewOffer) => void): void {
         this.#onNewOffer(callback)
     }
+
+    async getSaleDetails(marketplaceId: ethers.BigNumber): Promise<V2.saleDetails> {
+        return this.contract.getSaleDetails(marketplaceId).then((details: any): V2.saleDetails => ({
+            amount: details.amount,
+            amountBatches: details.amountBatches,
+            amountRemaining: details.amountRemaining,
+            complete: details.complete,
+            devFeePercentage: details.devFeePercentage,
+            startTime: details.startTime,
+            endTime: details.endTime,
+            isAuction: details.isAuction,
+            maxBidOrOffer: details.maxBidOrOffer,
+            maxBidderOrOfferer: details.maxBidderOrOfferer,
+            nfts: details.nfts,
+            tokenIds: details.tokenIds,
+            price: details.price,
+            seller: details.seller,
+        }))
+    }
+
+    async getNextMinimumBidOrOffer(marketplaceId: ethers.BigNumber): Promise<ethers.BigNumber> {
+        return this.contract.nextMinimumBidOrOffer(marketplaceId)
+    }
 }
 
 export default MarketplaceV2
