@@ -87,3 +87,25 @@ export interface NewOffer {
     offer: BigNumber
     nextMinimum: BigNumber
 }
+
+// -----------
+
+export type saleDetails = {
+    nfts: Array<string>;
+    tokenIds: Array<BigNumber>;
+    amountBatches: Array<BigNumber>;
+    seller: string;
+    price: BigNumber; // reserve price if auction
+    startTime: BigNumber;
+    endTime: BigNumber;
+    // For bids/offers
+    maxBidOrOffer: BigNumber;
+    maxBidderOrOfferer: string;
+    // Whether this is an auction
+    isAuction: boolean;
+    // How many are they selling and how many remain (the bundles themselves)
+    amount: BigNumber;
+    amountRemaining: BigNumber;
+    complete: boolean;
+    devFeePercentage: BigNumber;
+}
