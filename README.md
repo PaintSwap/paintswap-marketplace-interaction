@@ -2,10 +2,10 @@
 
 ## Setup
 
-Requires: npm
+Requires: yarn
 
 ```bash
-npm install .
+yarn install
 ```
 
 ## Run
@@ -13,13 +13,13 @@ npm install .
 ### Listen to different kinds of events from the marketplace
 
 ```bash
-npm run listen
+yarn listen
 ```
 
 ### Query sale details on a specific marketplace sale ID
 
 ```bash
-npm run query
+yarn query
 ```
 
 ## For developers
