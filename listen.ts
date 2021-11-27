@@ -17,8 +17,11 @@ marketplace.onSold((sale) => {
     console.log('Sold!\n', sale)
 })
 
-marketplace.onUnsold((sale) => {
-    console.log('Failed sale :(\n', sale)
+marketplace.onUnsold((sale, cancelled) => {
+    if (cancelled)
+        console.log('Cancelled sale\n', sale)
+    else
+        console.log('Failed to sell\n', sale)
 })
 
 marketplace.onPriceUpdate((sale) => {

@@ -33,10 +33,10 @@ interface NewSaleBase {
     isNSFW: boolean
 }
 
-export interface NewBundleSale extends BundlePriced, NewSaleBase {}
+export interface NewBundleSale extends BundlePriced, NewSaleBase { }
 
 // NewBundleSale splits into NewSale
-export interface NewSale extends Priced, NewSaleBase {}
+export interface NewSale extends Priced, NewSaleBase { }
 
 // -----------
 
@@ -46,17 +46,17 @@ interface SoldBase {
     seller: string
 }
 
-export interface BundleSold extends BundlePriced, SoldBase {}
+export interface BundleSold extends BundlePriced, SoldBase { }
 
 // BundleSold splits into Sold
-export interface Sold extends Priced, SoldBase {}
+export interface Sold extends Priced, SoldBase { }
 
 // -----------
 
-export interface BundleUnsold extends BundleBase {}
+export interface BundleUnsold extends BundleBase { }
 
 // BundleUnsold splits into Unsold
-export interface Unsold extends Base {}
+export interface Unsold extends Base { }
 
 // -----------
 

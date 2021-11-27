@@ -133,6 +133,18 @@ export class MarketplaceV2 {
         })
     }
 
+    #onCancelledImpl(callback: (bundle: V2.BundleUnsold) => void): void {
+        this.contract.on("CancelledSale", (marketplaceId, nfts, tokenIds, amountBatches, event) => {
+            const bundle: V2.BundleUnsold = {
+                marketplaceId,
+                nfts,
+                tokenIds,
+                amountBatches
+            }
+            callback(bundle)
+        })
+    }
+
     #onPriceUpdateImpl(callback: (bundle: V2.BundlePriceUpdate) => void): void {
         this.contract.on("UpdatePrice", (marketplaceId, nfts, tokenIds, event) => {
             const bundle: V2.BundlePriceUpdate = {
@@ -170,12 +182,14 @@ export class MarketplaceV2 {
         this.#onSoldImpl((bundle) => MarketplaceV2Utils.splitBundleSold(bundle).forEach(callback))
     }
 
-    onUnsoldAsBundle(callback: (sale: V2.BundleUnsold) => void): void {
-        this.#onUnsoldImpl(callback)
+    onUnsoldAsBundle(callback: (sale: V2.BundleUnsold, cancelled: boolean) => void): void {
+        this.#onUnsoldImpl((sale) => callback(sale, false)) // not cancelled
+        this.#onCancelledImpl((sale) => callback(sale, true)) // cancelled
     }
 
-    onUnsold(callback: (sale: V2.Unsold) => void): void {
-        this.#onUnsoldImpl((bundle) => MarketplaceV2Utils.splitBundleUnsold(bundle).forEach(callback))
+    onUnsold(callback: (sale: V2.Unsold, cancelled: boolean) => void): void {
+        this.#onUnsoldImpl((bundle) => MarketplaceV2Utils.splitBundleUnsold(bundle).forEach((sale) => callback(sale, false))) // not cancelled
+        this.#onCancelledImpl((bundle) => MarketplaceV2Utils.splitBundleUnsold(bundle).forEach((sale) => callback(sale, true))) // cancelled
     }
 
     onPriceUpdateAsBundle(callback: (sale: V2.BundlePriceUpdate) => void): void {
