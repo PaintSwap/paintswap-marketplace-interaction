@@ -1,4 +1,5 @@
 #!/usr/bin/env ts-node
+/* eslint-disable no-console */
 
 import { ethers } from 'ethers'
 import MarketplaceV2 from './lib/marketplaceV2'
