@@ -71,3 +71,19 @@ export interface DurationExtended {
     marketplaceId: BigNumber
     endTime: BigNumber
 }
+
+// -----------
+
+export interface NewBid {
+    marketplaceId: BigNumber
+    bidder: string
+    bid: BigNumber
+    nextMinimum: BigNumber
+}
+
+export interface NewOffer {
+    marketplaceId: BigNumber
+    offerrer: string
+    offer: BigNumber
+    nextMinimum: BigNumber
+}

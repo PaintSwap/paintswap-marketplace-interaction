@@ -162,6 +162,30 @@ export class MarketplaceV2 {
         })
     }
 
+    #onNewBid(callback: (bid: V2.NewBid) => void): void {
+        this.contract.on("NewBid", (marketplaceId, bidder, bid, nextMinimum) => {
+            const newBid: V2.NewBid = {
+                marketplaceId,
+                bidder,
+                bid,
+                nextMinimum
+            }
+            callback(newBid)
+        })
+    }
+
+    #onNewOffer(callback: (offer: V2.NewOffer) => void): void {
+        this.contract.on("NewOffer", (marketplaceId, offerrer, offer, nextMinimum) => {
+            const newOffer: V2.NewOffer = {
+                marketplaceId,
+                offerrer,
+                offer,
+                nextMinimum
+            }
+            callback(newOffer)
+        })
+    }
+
     onNewSaleAsBundle(callback: (sale: V2.NewBundleSale) => void): void {
         this.#onNewSaleImpl(callback)
     }
@@ -195,6 +219,14 @@ export class MarketplaceV2 {
     // Auctions with bids near the end get auto extended by 5 minutes
     onDurationExtended(callback: (extension: V2.DurationExtended) => void): void {
         this.#onDurationExtended(callback)
+    }
+
+    onNewBid(callback: (bid: V2.NewBid) => void): void {
+        this.#onNewBid(callback)
+    }
+
+    onNewOffer(callback: (offer: V2.NewOffer) => void): void {
+        this.#onNewOffer(callback)
     }
 }
 

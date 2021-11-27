@@ -31,3 +31,11 @@ marketplace.onPriceUpdate((sale) => {
 marketplace.onDurationExtended((extension) => {
     console.log('Auction duration extended\n', extension)
 })
+
+marketplace.onNewBid((bid) => {
+    console.log('New bid\n', bid)
+})
+
+marketplace.onNewOffer((offer) => {
+    console.log('New offer\n', offer)
+})
