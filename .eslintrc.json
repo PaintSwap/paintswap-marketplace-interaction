@@ -1,0 +1,28 @@
+{
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["./src"]
+      }
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 13,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+  "rules": {
+    "no-console": ["warn", { "allow": ["info", "warn", "error"] }],
+    "no-plusplus": 0,
+    "prefer-destructuring": ["warn", { "object": true, "array": false }],
+    "no-underscore-dangle": 0
+  }
+}
