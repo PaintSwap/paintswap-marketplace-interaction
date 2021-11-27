@@ -2,7 +2,7 @@ import { BigNumber } from "ethers"
 
 export interface BundleBase {
     marketplaceId: BigNumber
-    nfts: Array<string> // the collection
+    nfts: Array<string> // the collections
     tokenIds: Array<BigNumber>
     amountBatches: Array<BigNumber> // individual amounts within each bundle
 }
@@ -57,3 +57,24 @@ export interface BundleUnsold extends BundleBase {}
 
 // BundleUnsold splits into Unsold
 export interface Unsold extends Base {}
+
+// -----------
+
+export interface BundlePriceUpdate {
+    marketplaceId: BigNumber
+    nfts: Array<string> // the collections
+    tokenIds: Array<BigNumber>
+}
+
+export interface PriceUpdate {
+    marketplaceId: BigNumber,
+    collection: string
+    tokenID: BigNumber
+}
+
+// -----------
+
+export interface DurationExtended {
+    marketplaceId: BigNumber
+    endTime: BigNumber
+}

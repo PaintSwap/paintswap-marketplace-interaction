@@ -20,3 +20,11 @@ marketplace.onSold((sale) => {
 marketplace.onUnsold((sale) => {
     console.log('Failed sale :(\n', sale)
 })
+
+marketplace.onPriceUpdate((sale) => {
+    console.log('Price updated\n', sale)
+})
+
+marketplace.onDurationExtended((extension) => {
+    console.log('Auction duration extended\n', extension)
+})

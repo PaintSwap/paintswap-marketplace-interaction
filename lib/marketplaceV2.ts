@@ -73,6 +73,10 @@ export class MarketplaceV2Utils {
     static splitBundleUnsold(bundle: V2.BundleUnsold): Array<V2.Unsold> {
         return this.#splitBundleBase(bundle)
     }
+
+    static splitBundlePriceUpdate(bundle: V2.BundlePriceUpdate): Array<V2.PriceUpdate> {
+        return this.#splitBundleBase(bundle as V2.BundleBase)
+    }
 }
 
 export class MarketplaceV2 {
@@ -129,6 +133,27 @@ export class MarketplaceV2 {
         })
     }
 
+    #onPriceUpdateImpl(callback: (bundle: V2.BundlePriceUpdate) => void): void {
+        this.contract.on("UpdatePrice", (marketplaceId, nfts, tokenIds, event) => {
+            const bundle: V2.BundlePriceUpdate = {
+                marketplaceId,
+                nfts,
+                tokenIds
+            }
+            callback(bundle)
+        })
+    }
+
+    #onDurationExtended(callback: (sale: V2.DurationExtended) => void): void {
+        this.contract.on("UpdateEndTime", (marketplaceId, endTime, event) => {
+            const extension: V2.DurationExtended = {
+                marketplaceId,
+                endTime
+            }
+            callback(extension)
+        })
+    }
+
     onNewSaleAsBundle(callback: (sale: V2.NewBundleSale) => void): void {
         this.#onNewSaleImpl(callback)
     }
@@ -151,6 +176,19 @@ export class MarketplaceV2 {
 
     onUnsold(callback: (sale: V2.Unsold) => void): void {
         this.#onUnsoldImpl((bundle) => MarketplaceV2Utils.splitBundleUnsold(bundle).forEach(callback))
+    }
+
+    onPriceUpdateAsBundle(callback: (sale: V2.BundlePriceUpdate) => void): void {
+        this.#onPriceUpdateImpl(callback)
+    }
+
+    onPriceUpdate(callback: (sale: V2.PriceUpdate) => void): void {
+        this.#onPriceUpdateImpl((bundle) => MarketplaceV2Utils.splitBundlePriceUpdate(bundle).forEach(callback))
+    }
+
+    // Auctions with bids near the end get auto extended by 5 minutes
+    onDurationExtended(callback: (extension: V2.DurationExtended) => void): void {
+        this.#onDurationExtended(callback)
     }
 }
 
