@@ -1,8 +1,8 @@
 import { ethers } from 'ethers'
 import * as V2 from './marketplaceV2Types'
 
-const MarketplaceV2ABI: ethers.ContractInterface = require('../abi/PaintSwapMarketplaceV2.json')
-const MarketplaceV2Address = '0x6125fD14b6790d5F66509B7aa53274c93dAE70B9'
+export const MarketplaceV2ABI: ethers.ContractInterface = require('../abi/PaintSwapMarketplaceV2.json')
+export const MarketplaceV2Address = '0x6125fD14b6790d5F66509B7aa53274c93dAE70B9'
 
 class MarketplaceV2Utils {
   /** @internal */
@@ -80,8 +80,8 @@ class MarketplaceV2Utils {
 export class MarketplaceV2 {
   contract: ethers.Contract
 
-  constructor(provider: ethers.providers.BaseProvider, address: string = MarketplaceV2Address) {
-    this.contract = new ethers.Contract(address, MarketplaceV2ABI, provider)
+  constructor(providerOrSigner: ethers.providers.Provider | ethers.Signer, address: string = MarketplaceV2Address) {
+    this.contract = new ethers.Contract(address, MarketplaceV2ABI, providerOrSigner)
   }
 
   /** @internal */
