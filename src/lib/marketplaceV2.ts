@@ -34,7 +34,7 @@ class MarketplaceV2Utils {
         tokenID: value.tokenID,
         amount: bundle.amount.mul(value.amountPerBundleUnit),
         pricePerUnit: bundle.pricePerUnit, // in case of a bundle every NFT will show as the same price, as we simply don't know
-        priceTotal: bundle.priceTotal
+        priceTotal: bundle.priceTotal,
       }
     })
   }
