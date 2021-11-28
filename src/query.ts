@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 
 import { ethers } from 'ethers'
-import MarketplaceV2 from './lib/marketplaceV2'
+import { MarketplaceV2, SaleDetails } from './lib'
 
 const provider = new ethers.providers.JsonRpcProvider('https://rpc.ftm.tools/')
 
@@ -10,7 +10,7 @@ const marketplace = new MarketplaceV2(provider)
 
 const QueryID = 68897 // https://paintswap.finance/marketplace/68897
 
-marketplace.getSaleDetails(ethers.BigNumber.from(QueryID)).then((details) => {
+marketplace.getSaleDetails(ethers.BigNumber.from(QueryID)).then((details: SaleDetails) => {
   console.log(`Sale details for sale ${QueryID}:\n`, details)
 })
 

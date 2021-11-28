@@ -6,7 +6,7 @@
     "type": "git",
     "url": "git+https://github.com/PaintSwap/paintswap-marketplace-interaction.git"
   },
-  "main": "dist/lib/marketplaceV2.js",
+  "main": "dist/lib/index.js",
   "types": "dist/lib/marketplaceV2.d.ts",
   "keywords": [
     "paintswap",

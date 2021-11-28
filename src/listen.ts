@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 
 import { ethers } from 'ethers'
-import MarketplaceV2 from './lib/marketplaceV2'
+import { MarketplaceV2 } from './lib'
 
 const provider = new ethers.providers.JsonRpcProvider('https://rpc.ftm.tools/')
 
