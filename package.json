@@ -21,8 +21,8 @@
     "dist/**/*"
   ],
   "scripts": {
-    "listen": "npx ts-node listen.ts",
-    "query": "npx ts-node query.ts",
+    "listen": "yarn ts-node src/listen.ts",
+    "query": "yarn ts-node src/query.ts",
     "build": "rm -rf ./dist/* && tsc",
     "prepare": "yarn build",
     "prepublishOnly": "yarn lint",
