@@ -26,17 +26,16 @@ export interface Priced extends Base {
 
 // -----------
 
-// A type describing a new listing
-interface NewSaleBase {
+interface NewListingBase {
   duration: BigNumber
   isAuction: boolean
   isNSFW: boolean
 }
 
-export interface NewBundleSale extends BundlePriced, NewSaleBase {}
+export interface NewBundleListing extends BundlePriced, NewListingBase {}
 
-// NewBundleSale splits into NewSale
-export interface NewSale extends Priced, NewSaleBase {}
+// NewBundleListing splits into NewListing
+export interface NewListing extends Priced, NewListingBase {}
 
 // -----------
 
@@ -90,7 +89,7 @@ export interface NewOffer {
 
 // -----------
 
-export type saleDetails = {
+export type SaleDetails = {
   nfts: Array<string>
   tokenIds: Array<BigNumber>
   amountBatches: Array<BigNumber>
