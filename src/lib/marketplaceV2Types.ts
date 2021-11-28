@@ -90,7 +90,7 @@ export interface NewOffer {
 
 // -----------
 
-export type saleDetails = {
+export type SaleDetails = {
   nfts: Array<string>
   tokenIds: Array<BigNumber>
   amountBatches: Array<BigNumber>
