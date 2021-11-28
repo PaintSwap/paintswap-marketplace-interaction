@@ -16,7 +16,7 @@ class MarketplaceV2Utils {
         marketplaceId: bundle.marketplaceId,
         collection: bundle.nfts[i],
         tokenID: bundle.tokenIds[i],
-        amountInBundle: bundle.amountBatches[i],
+        amountPerBundleUnit: bundle.amountBatches[i],
       }
       result.push(base)
     }
@@ -26,18 +26,15 @@ class MarketplaceV2Utils {
   /** @internal */
   static splitBundlePriced(bundle: V2.BundlePriced): Array<V2.Priced> {
     const base = MarketplaceV2Utils.splitBundleBase(bundle)
-    const totalAmountInEachBundle = bundle.amountBatches.reduce((a: ethers.BigNumber, b: ethers.BigNumber) => a.add(b))
     return base.map((value): V2.Priced => {
-      // Price is for the *individual* NFT, so it's averaged taking into account the bundle composition and number of bundles sold
-      const bundleRatio = value.amountInBundle.toNumber() / totalAmountInEachBundle.toNumber()
-      const price = bundle.price.mul(bundleRatio).div(bundle.amount)
       return {
         marketplaceId: value.marketplaceId,
         collection: value.collection,
-        amountInBundle: value.amountInBundle,
+        amountPerBundleUnit: value.amountPerBundleUnit,
         tokenID: value.tokenID,
-        amount: bundle.amount.mul(value.amountInBundle),
-        price,
+        amount: bundle.amount.mul(value.amountPerBundleUnit),
+        pricePerUnit: bundle.pricePerUnit, // in case of a bundle every NFT will show as the same price, as we simply don't know
+        priceTotal: bundle.priceTotal
       }
     })
   }
@@ -47,10 +44,11 @@ class MarketplaceV2Utils {
       return {
         marketplaceId: value.marketplaceId,
         collection: value.collection,
-        amountInBundle: value.amountInBundle,
+        amountPerBundleUnit: value.amountPerBundleUnit,
         tokenID: value.tokenID,
         amount: value.amount,
-        price: value.price,
+        pricePerUnit: value.pricePerUnit,
+        priceTotal: value.priceTotal,
         buyer: bundle.buyer,
         seller: bundle.seller,
       }
@@ -62,10 +60,11 @@ class MarketplaceV2Utils {
       return {
         marketplaceId: value.marketplaceId,
         collection: value.collection,
-        amountInBundle: value.amountInBundle,
+        amountPerBundleUnit: value.amountPerBundleUnit,
         tokenID: value.tokenID,
         amount: value.amount,
-        price: value.price,
+        pricePerUnit: value.pricePerUnit,
+        priceTotal: value.priceTotal,
         duration: bundle.duration,
         isAuction: bundle.isAuction,
         isNSFW: bundle.isNSFW,
@@ -109,7 +108,8 @@ export class MarketplaceV2 {
           nfts,
           tokenIds,
           amountBatches,
-          price,
+          pricePerUnit: price,
+          priceTotal: price.mul(amount),
           duration,
           isAuction,
           amount,
@@ -128,7 +128,8 @@ export class MarketplaceV2 {
         nfts,
         tokenIds,
         amountBatches,
-        price,
+        pricePerUnit: price,
+        priceTotal: price.mul(amount),
         buyer,
         seller,
         amount,

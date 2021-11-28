@@ -9,19 +9,21 @@ export interface BundleBase {
 
 export interface BundlePriced extends BundleBase {
   amount: BigNumber
-  price: BigNumber
+  pricePerUnit: BigNumber
+  priceTotal: BigNumber
 }
 
 export interface Base {
   marketplaceId: BigNumber
   collection: string
   tokenID: BigNumber
-  amountInBundle: BigNumber
+  amountPerBundleUnit: BigNumber
 }
 
 export interface Priced extends Base {
   amount: BigNumber
-  price: BigNumber
+  pricePerUnit: BigNumber
+  priceTotal: BigNumber
 }
 
 // -----------
@@ -94,7 +96,7 @@ export type SaleDetails = {
   tokenIds: Array<BigNumber>
   amountBatches: Array<BigNumber>
   seller: string
-  price: BigNumber // reserve price if auction
+  price: BigNumber // per unit, reserve price if auction
   startTime: BigNumber
   endTime: BigNumber
   // For bids/offers
