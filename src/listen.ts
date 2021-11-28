@@ -8,7 +8,7 @@ const provider = new ethers.providers.JsonRpcProvider('https://rpc.ftm.tools/')
 
 const marketplace = new MarketplaceV2(provider)
 
-marketplace.onNewSale((sale) => {
+marketplace.onNewListing((sale) => {
   console.log('New listing!\n', sale)
 })
 

@@ -56,8 +56,8 @@ class MarketplaceV2Utils {
     })
   }
 
-  static splitBundleNewSale(bundle: V2.NewBundleSale): Array<V2.NewSale> {
-    return MarketplaceV2Utils.splitBundlePriced(bundle).map((value): V2.NewSale => {
+  static splitBundleNewSale(bundle: V2.NewBundleListing): Array<V2.NewListing> {
+    return MarketplaceV2Utils.splitBundlePriced(bundle).map((value): V2.NewListing => {
       return {
         marketplaceId: value.marketplaceId,
         collection: value.collection,
@@ -85,7 +85,7 @@ export class MarketplaceV2 {
   }
 
   /** @internal */
-  onNewSaleImpl(callback: (sale: V2.NewBundleSale) => void): void {
+  onNewListingImpl(callback: (sale: V2.NewBundleListing) => void): void {
     this.contract.on(
       'NewSale',
       (
@@ -103,7 +103,7 @@ export class MarketplaceV2 {
         routerAddresses,
         event,
       ) => {
-        const bundle: V2.NewBundleSale = {
+        const bundle: V2.NewBundleListing = {
           marketplaceId,
           nfts,
           tokenIds,
@@ -213,12 +213,12 @@ export class MarketplaceV2 {
     })
   }
 
-  onNewSaleAsBundle(callback: (sale: V2.NewBundleSale) => void): void {
-    this.onNewSaleImpl(callback)
+  onNewListingAsBundle(callback: (sale: V2.NewBundleListing) => void): void {
+    this.onNewListingImpl(callback)
   }
 
-  onNewSale(callback: (sale: V2.NewSale) => void): void {
-    this.onNewSaleImpl((bundle) => MarketplaceV2Utils.splitBundleNewSale(bundle).forEach(callback))
+  onNewListing(callback: (sale: V2.NewListing) => void): void {
+    this.onNewListingImpl((bundle) => MarketplaceV2Utils.splitBundleNewSale(bundle).forEach(callback))
   }
 
   onSoldAsBundle(callback: (sale: V2.BundleSold) => void): void {
