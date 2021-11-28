@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 import * as V2 from './marketplaceV2Types'
-import MarketplaceV2ABIRaw from "../abi/PaintSwapMarketplaceV2.json"
+import MarketplaceV2ABIRaw from '../abi/PaintSwapMarketplaceV2.json'
 
 export const MarketplaceV2ABI: ethers.ContractInterface = MarketplaceV2ABIRaw
 export const MarketplaceV2Address = '0x6125fD14b6790d5F66509B7aa53274c93dAE70B9'
