@@ -1,5 +1,7 @@
 # Paintswap Marketplace Interaction
 
+Provides a typescript-enabled wrapper around the PaintSwap MarketplaceV2 contract.
+
 ## Setup
 
 Requires: yarn
@@ -22,15 +24,36 @@ yarn listen
 yarn query
 ```
 
-## For developers
+## @paintswap/marketplace-interactions
 
-Files `listen.ts` and `query.ts` provide examples of interactions with all functions defined by the `MarketplaceV2` class.
+Types are deefined in [marketplaceV2Types](./src/lib/marketplaceV2Types.ts).
 
-`MarketplaceV2` defines a wrapper around the events and getters of the main contract.
+[MarketplaceV2](./src/lib/marketplaceV2.ts) defines a typescript-enabled wrapper around the events and getters of the main contract to make it simpler to use.
 
-To better understand the types, you will want to take a look at the files within `lib/`.
+Scripts [listen.ts](./src/listen.ts) and [query.ts](./src/query.ts) provide examples of interactions all functions defined by the `MarketplaceV2` class.
+
+### Use in your own scripts
+
+First, include `@paintswap/marketplace-interactions` in your `package.json`.
+
+As an example if you'd like to subscribe to Sold events:
+
+```ts
+import { MarketplaceV2, Sold } from '@paintswap/marketplace-interactions';
+
+const provider = new ethers.providers.JsonRpcProvider(
+  "https://rpc.ftm.tools/"
+);
+
+const marketplace = new MarketplaceV2(provider)
+
+v2.onSold((sale) => console.log(sale))
+```
+
+### Reliability and Guarantees
+
+Please note this library is only as reliable as the given RPC provider and the events that come through it. There is no guarantee of event delivery.
 
 ## Upcoming
 
-* Contract interaction: buy, make offers, make bids
-* Examples to query the Paintswap API to get rich information about NFTs and sales
+See existing [Enhancement Issues](https://github.com/PaintSwap/paintswap-marketplace-interaction/labels/enhancement)
