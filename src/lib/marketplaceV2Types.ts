@@ -70,7 +70,7 @@ export interface BundlePriceUpdate {
 
 export interface DurationExtended {
   marketplaceId: BigNumber
-  endTime: BigNumber
+  endTime: BigNumber // as defined by solidity, seconds since the unix epoch
 }
 
 // -----------
@@ -98,7 +98,7 @@ export type SaleDetails = {
   seller: string
   price: BigNumber // per unit, reserve price if auction
   startTime: BigNumber
-  endTime: BigNumber
+  endTime: BigNumber // as defined by solidity, seconds since the unix epoch
   // For bids/offers
   maxBidOrOffer: BigNumber
   maxBidderOrOfferer: string
