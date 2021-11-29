@@ -283,6 +283,10 @@ export class MarketplaceV2 {
   async getNextMinimumBidOrOffer(marketplaceId: ethers.BigNumber): Promise<ethers.BigNumber> {
     return this.contract.nextMinimumBidOrOffer(marketplaceId)
   }
+
+  async getNextMarketplaceId(): Promise<ethers.BigNumber> {
+    return this.contract.currentMarketplaceId()
+  }
 }
 
 export default MarketplaceV2
