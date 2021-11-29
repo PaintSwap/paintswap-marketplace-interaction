@@ -80,12 +80,18 @@ class MarketplaceV2Utils {
 export class MarketplaceV2 {
   contract: ethers.Contract
 
+  /**
+   * @param providerOrSigner an ethers compatible provider or signer https://docs.ethers.io/v5/api/providers/
+   * @param address if given, overrides the default marketplace contract address
+   */
   constructor(providerOrSigner: ethers.providers.Provider | ethers.Signer, address: string = MarketplaceV2Address) {
     this.contract = new ethers.Contract(address, MarketplaceV2ABI, providerOrSigner)
   }
 
-  /** @internal */
-  onNewListingImpl(callback: (sale: V2.NewBundleListing) => void): void {
+  /**
+   * @param callback called for new listings, as bundles
+   */
+  onNewListingAsBundle(callback: (sale: V2.NewBundleListing) => void): void {
     this.contract.on(
       'NewSale',
       (
@@ -120,8 +126,17 @@ export class MarketplaceV2 {
     )
   }
 
-  /** @internal */
-  onSoldImpl(callback: (bundle: V2.BundleSold) => void): void {
+  /**
+   * @param callback called for new listings, as individual NFTs
+   */
+  onNewListing(callback: (sale: V2.NewListing) => void): void {
+    this.onNewListingAsBundle((bundle) => MarketplaceV2Utils.splitBundleNewSale(bundle).forEach(callback))
+  }
+
+  /**
+   * @param callback called for successfully sold items, as bundles
+   */
+  onSoldAsBundle(callback: (bundle: V2.BundleSold) => void): void {
     this.contract.on('Sold', (marketplaceId, nfts, tokenIds, amountBatches, price, buyer, seller, amount, event) => {
       const bundle: V2.BundleSold = {
         marketplaceId,
@@ -138,8 +153,19 @@ export class MarketplaceV2 {
     })
   }
 
-  /** @internal */
-  onUnsoldImpl(callback: (bundle: V2.BundleUnsold) => void): void {
+  /**
+   * @param callback called for successfuly sold items, as individual NFTs
+   */
+  onSold(callback: (sale: V2.Sold) => void): void {
+    this.onSoldAsBundle((bundle) => MarketplaceV2Utils.splitBundleSold(bundle).forEach(callback))
+  }
+
+  /**
+   * @internal
+   * @param callback called for finished unsuccessful sales, as bundles
+   * @note does not provide cancelled sales
+   */
+  onUnsoldAsBundleImpl(callback: (bundle: V2.BundleUnsold) => void): void {
     this.contract.on('SaleFinished', (marketplaceId, nfts, tokenIds, amountBatches, failedSellAll, event) => {
       if (failedSellAll) {
         const bundle: V2.BundleUnsold = {
@@ -153,8 +179,10 @@ export class MarketplaceV2 {
     })
   }
 
-  /** @internal */
-  onCancelledImpl(callback: (bundle: V2.BundleUnsold) => void): void {
+  /**
+   * @param callback called for cancelled sales, as bundles
+   */
+  onCancelledAsBundleImpl(callback: (bundle: V2.BundleUnsold) => void): void {
     this.contract.on('CancelledSale', (marketplaceId, nfts, tokenIds, amountBatches, event) => {
       const bundle: V2.BundleUnsold = {
         marketplaceId,
@@ -166,8 +194,27 @@ export class MarketplaceV2 {
     })
   }
 
-  /** @internal */
-  onPriceUpdateImpl(callback: (bundle: V2.BundlePriceUpdate) => void): void {
+  /**
+   * @param callback called for unsuccessful sales as bundles, noting if it was due to a cancellation or simply ending without selling
+   */
+  onUnsoldAsBundle(callback: (sale: V2.BundleUnsold, cancelled: boolean) => void): void {
+    this.onUnsoldAsBundleImpl((sale) => callback(sale, false)) // not cancelled
+    this.onCancelledAsBundleImpl((sale) => callback(sale, true)) // cancelled
+  }
+
+  /**
+   * @param callback called for unsuccessful sales as individual NFTs, noting if it was due to a cancellation or simply ending without selling
+   */
+  onUnsold(callback: (sale: V2.Unsold, cancelled: boolean) => void): void {
+    this.onUnsoldAsBundle((bundle, was_cancelled) =>
+      MarketplaceV2Utils.splitBundleUnsold(bundle).forEach((sale) => callback(sale, was_cancelled)),
+    )
+  }
+
+  /**
+   * @param callback called for price updates to sales
+   */
+  onPriceUpdate(callback: (bundle: V2.BundlePriceUpdate) => void): void {
     // Not handled as individual pieces due to missing amountBatches information
     this.contract.on('UpdatePrice', (marketplaceId, price, nfts, tokenIds, event) => {
       const bundle: V2.BundlePriceUpdate = {
@@ -178,8 +225,10 @@ export class MarketplaceV2 {
     })
   }
 
-  /** @internal */
-  onDurationExtendedImpl(callback: (sale: V2.DurationExtended) => void): void {
+  /**
+   * @param callback called when auctions are extended
+   */
+  onDurationExtended(callback: (sale: V2.DurationExtended) => void): void {
     this.contract.on('UpdateEndTime', (marketplaceId, endTime, event) => {
       const extension: V2.DurationExtended = {
         marketplaceId,
@@ -189,8 +238,11 @@ export class MarketplaceV2 {
     })
   }
 
-  /** @internal */
-  onNewBidImpl(callback: (bid: V2.NewBid) => void): void {
+  /**
+   * @param callback called for new bids on auctions
+   * @note a new bid refunds the previously highest bid
+   */
+  onNewBid(callback: (bid: V2.NewBid) => void): void {
     this.contract.on('NewBid', (marketplaceId, bidder, bid, nextMinimum) => {
       const newBid: V2.NewBid = {
         marketplaceId,
@@ -202,8 +254,11 @@ export class MarketplaceV2 {
     })
   }
 
-  /** @internal */
-  onNewOfferImpl(callback: (offer: V2.NewOffer) => void): void {
+  /**
+   * @param callback called for new offers on auctions
+   * @note a new offer refunds the previously highest offer
+   */
+  onNewOffer(callback: (offer: V2.NewOffer) => void): void {
     this.contract.on('NewOffer', (marketplaceId, offerrer, offer, nextMinimum) => {
       const newOffer: V2.NewOffer = {
         marketplaceId,
@@ -215,50 +270,10 @@ export class MarketplaceV2 {
     })
   }
 
-  onNewListingAsBundle(callback: (sale: V2.NewBundleListing) => void): void {
-    this.onNewListingImpl(callback)
-  }
-
-  onNewListing(callback: (sale: V2.NewListing) => void): void {
-    this.onNewListingImpl((bundle) => MarketplaceV2Utils.splitBundleNewSale(bundle).forEach(callback))
-  }
-
-  onSoldAsBundle(callback: (sale: V2.BundleSold) => void): void {
-    this.onSoldImpl(callback)
-  }
-
-  onSold(callback: (sale: V2.Sold) => void): void {
-    this.onSoldImpl((bundle) => MarketplaceV2Utils.splitBundleSold(bundle).forEach(callback))
-  }
-
-  onUnsoldAsBundle(callback: (sale: V2.BundleUnsold, cancelled: boolean) => void): void {
-    this.onUnsoldImpl((sale) => callback(sale, false)) // not cancelled
-    this.onCancelledImpl((sale) => callback(sale, true)) // cancelled
-  }
-
-  onUnsold(callback: (sale: V2.Unsold, cancelled: boolean) => void): void {
-    this.onUnsoldImpl((bundle) => MarketplaceV2Utils.splitBundleUnsold(bundle).forEach((sale) => callback(sale, false))) // not cancelled
-    this.onCancelledImpl((bundle) =>
-      MarketplaceV2Utils.splitBundleUnsold(bundle).forEach((sale) => callback(sale, true)),
-    ) // cancelled
-  }
-
-  onPriceUpdate(callback: (sale: V2.BundlePriceUpdate) => void): void {
-    this.onPriceUpdateImpl(callback)
-  }
-
-  onDurationExtended(callback: (extension: V2.DurationExtended) => void): void {
-    this.onDurationExtendedImpl(callback)
-  }
-
-  onNewBid(callback: (bid: V2.NewBid) => void): void {
-    this.onNewBidImpl(callback)
-  }
-
-  onNewOffer(callback: (offer: V2.NewOffer) => void): void {
-    this.onNewOfferImpl(callback)
-  }
-
+  /**
+   * @param marketplaceId the sale ID for which to grab details. The one that goes into https://paintswap.finance/marketplace/<ID>
+   * @returns a SaleDetails objects with details about this sale
+   */
   async getSaleDetails(marketplaceId: ethers.BigNumber): Promise<V2.SaleDetails> {
     return this.contract.getSaleDetails(marketplaceId).then(
       (details: any): V2.SaleDetails => ({
@@ -280,10 +295,19 @@ export class MarketplaceV2 {
     )
   }
 
+  /**
+   * @param marketplaceId the sale ID for which to grab details. The one that goes into https://paintswap.finance/marketplace/<ID>
+   * @returns the next minimum bid (or offer) that this sale will accept, as a BigNumber
+   */
   async getNextMinimumBidOrOffer(marketplaceId: ethers.BigNumber): Promise<ethers.BigNumber> {
     return this.contract.nextMinimumBidOrOffer(marketplaceId)
   }
 
+  /**
+   * @returns the next ID to be used when a new listing happens, as a BigNumber
+   * @note the latest sale ID is simply the return of this function minus one
+   * @note MarketplaceV2 did not start at ID 0
+   */
   async getNextMarketplaceId(): Promise<ethers.BigNumber> {
     return this.contract.currentMarketplaceId()
   }
