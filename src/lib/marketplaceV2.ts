@@ -51,6 +51,7 @@ class MarketplaceV2Utils {
         priceTotal: value.priceTotal,
         buyer: bundle.buyer,
         seller: bundle.seller,
+        event: bundle.event
       }
     })
   }
@@ -68,12 +69,19 @@ class MarketplaceV2Utils {
         duration: bundle.duration,
         isAuction: bundle.isAuction,
         isNSFW: bundle.isNSFW,
+        event: bundle.event
       }
     })
   }
 
   static splitBundleUnsold(bundle: V2.BundleUnsold): Array<V2.Unsold> {
-    return this.splitBundleBase(bundle)
+    return this.splitBundleBase(bundle).map((base): V2.Unsold => ({
+      collection: base.collection,
+      amountPerBundleUnit: base.amountPerBundleUnit,
+      marketplaceId: base.marketplaceId,
+      tokenID: base.marketplaceId,
+      event: bundle.event
+    }))
   }
 }
 
@@ -120,6 +128,7 @@ export class MarketplaceV2 {
           isAuction,
           amount,
           isNSFW,
+          event
         }
         callback(bundle)
       },
@@ -148,6 +157,7 @@ export class MarketplaceV2 {
         buyer,
         seller,
         amount,
+        event
       }
       callback(bundle)
     })
@@ -173,6 +183,7 @@ export class MarketplaceV2 {
           nfts,
           tokenIds,
           amountBatches,
+          event
         }
         callback(bundle)
       }
@@ -189,6 +200,7 @@ export class MarketplaceV2 {
         nfts,
         tokenIds,
         amountBatches,
+        event
       }
       callback(bundle)
     })
@@ -220,6 +232,7 @@ export class MarketplaceV2 {
       const bundle: V2.BundlePriceUpdate = {
         marketplaceId,
         price,
+        event
       }
       callback(bundle)
     })
@@ -233,6 +246,7 @@ export class MarketplaceV2 {
       const extension: V2.DurationExtended = {
         marketplaceId,
         endTime,
+        event
       }
       callback(extension)
     })
@@ -243,12 +257,13 @@ export class MarketplaceV2 {
    * @note a new bid refunds the previously highest bid
    */
   onNewBid(callback: (bid: V2.NewBid) => void): void {
-    this.contract.on('NewBid', (marketplaceId, bidder, bid, nextMinimum) => {
+    this.contract.on('NewBid', (marketplaceId, bidder, bid, nextMinimum, event) => {
       const newBid: V2.NewBid = {
         marketplaceId,
         bidder,
         bid,
         nextMinimum,
+        event
       }
       callback(newBid)
     })
@@ -259,12 +274,13 @@ export class MarketplaceV2 {
    * @note a new offer refunds the previously highest offer
    */
   onNewOffer(callback: (offer: V2.NewOffer) => void): void {
-    this.contract.on('NewOffer', (marketplaceId, offerrer, offer, nextMinimum) => {
+    this.contract.on('NewOffer', (marketplaceId, offerrer, offer, nextMinimum, event) => {
       const newOffer: V2.NewOffer = {
         marketplaceId,
         offerrer,
         offer,
         nextMinimum,
+        event
       }
       callback(newOffer)
     })

@@ -1,4 +1,4 @@
-import { BigNumber } from 'ethers'
+import { ethers, BigNumber } from 'ethers'
 
 export interface BundleBase {
   marketplaceId: BigNumber
@@ -34,10 +34,14 @@ interface NewListingBase {
   isNSFW: boolean
 }
 
-export interface NewBundleListing extends BundlePriced, NewListingBase {}
+export interface NewBundleListing extends BundlePriced, NewListingBase {
+  event: ethers.Event
+}
 
 // NewBundleListing splits into NewListing
-export interface NewListing extends Priced, NewListingBase {}
+export interface NewListing extends Priced, NewListingBase {
+  event: ethers.Event
+}
 
 // -----------
 
@@ -47,23 +51,32 @@ interface SoldBase {
   seller: string
 }
 
-export interface BundleSold extends BundlePriced, SoldBase {}
+export interface BundleSold extends BundlePriced, SoldBase {
+  event: ethers.Event
+}
 
 // BundleSold splits into Sold
-export interface Sold extends Priced, SoldBase {}
+export interface Sold extends Priced, SoldBase {
+  event: ethers.Event
+}
 
 // -----------
 
-export interface BundleUnsold extends BundleBase {}
+export interface BundleUnsold extends BundleBase {
+  event: ethers.Event
+}
 
 // BundleUnsold splits into Unsold
-export interface Unsold extends Base {}
+export interface Unsold extends Base {
+  event: ethers.Event
+}
 
 // -----------
 
 export interface BundlePriceUpdate {
   marketplaceId: BigNumber
   price: BigNumber
+  event: ethers.Event
 }
 
 // -----------
@@ -71,6 +84,7 @@ export interface BundlePriceUpdate {
 export interface DurationExtended {
   marketplaceId: BigNumber
   endTime: BigNumber // as defined by solidity, seconds since the unix epoch
+  event: ethers.Event
 }
 
 // -----------
@@ -80,6 +94,7 @@ export interface NewBid {
   bidder: string
   bid: BigNumber
   nextMinimum: BigNumber
+  event: ethers.Event
 }
 
 export interface NewOffer {
@@ -87,6 +102,7 @@ export interface NewOffer {
   offerrer: string
   offer: BigNumber
   nextMinimum: BigNumber
+  event: ethers.Event
 }
 
 // -----------
