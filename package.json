@@ -57,6 +57,7 @@
     "prettier": "^2.5.0",
     "run-script-os": "^1.1.6",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.2"
+    "typescript": "^4.5.2",
+    "typedoc": "latest"
   }
 }

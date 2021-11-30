@@ -51,7 +51,7 @@ class MarketplaceV2Utils {
         priceTotal: value.priceTotal,
         buyer: bundle.buyer,
         seller: bundle.seller,
-        event: bundle.event
+        event: bundle.event,
       }
     })
   }
@@ -69,19 +69,21 @@ class MarketplaceV2Utils {
         duration: bundle.duration,
         isAuction: bundle.isAuction,
         isNSFW: bundle.isNSFW,
-        event: bundle.event
+        event: bundle.event,
       }
     })
   }
 
   static splitBundleUnsold(bundle: V2.BundleUnsold): Array<V2.Unsold> {
-    return this.splitBundleBase(bundle).map((base): V2.Unsold => ({
-      collection: base.collection,
-      amountPerBundleUnit: base.amountPerBundleUnit,
-      marketplaceId: base.marketplaceId,
-      tokenID: base.marketplaceId,
-      event: bundle.event
-    }))
+    return this.splitBundleBase(bundle).map(
+      (base): V2.Unsold => ({
+        collection: base.collection,
+        amountPerBundleUnit: base.amountPerBundleUnit,
+        marketplaceId: base.marketplaceId,
+        tokenID: base.marketplaceId,
+        event: bundle.event,
+      }),
+    )
   }
 }
 
@@ -128,7 +130,7 @@ export class MarketplaceV2 {
           isAuction,
           amount,
           isNSFW,
-          event
+          event,
         }
         callback(bundle)
       },
@@ -157,7 +159,7 @@ export class MarketplaceV2 {
         buyer,
         seller,
         amount,
-        event
+        event,
       }
       callback(bundle)
     })
@@ -183,7 +185,7 @@ export class MarketplaceV2 {
           nfts,
           tokenIds,
           amountBatches,
-          event
+          event,
         }
         callback(bundle)
       }
@@ -200,7 +202,7 @@ export class MarketplaceV2 {
         nfts,
         tokenIds,
         amountBatches,
-        event
+        event,
       }
       callback(bundle)
     })
@@ -232,7 +234,7 @@ export class MarketplaceV2 {
       const bundle: V2.BundlePriceUpdate = {
         marketplaceId,
         price,
-        event
+        event,
       }
       callback(bundle)
     })
@@ -246,7 +248,7 @@ export class MarketplaceV2 {
       const extension: V2.DurationExtended = {
         marketplaceId,
         endTime,
-        event
+        event,
       }
       callback(extension)
     })
@@ -263,7 +265,7 @@ export class MarketplaceV2 {
         bidder,
         bid,
         nextMinimum,
-        event
+        event,
       }
       callback(newBid)
     })
@@ -280,7 +282,7 @@ export class MarketplaceV2 {
         offerrer,
         offer,
         nextMinimum,
-        event
+        event,
       }
       callback(newOffer)
     })
