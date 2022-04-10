@@ -23,6 +23,7 @@
   "scripts": {
     "listen": "yarn ts-node src/listen.ts",
     "query": "yarn ts-node src/query.ts",
+    "filter": "yarn ts-node src/filter.ts",
     "build": "rm -rf ./dist/* && tsc",
     "prepare": "yarn build",
     "prepublishOnly": "yarn lint",
