@@ -75,6 +75,6 @@ const retrieveFinished = () => {
 
 /* ---------------------------- */
 // Enable only one to avoid scrambling the terminal, as they happen async
-// retrieveNewListings()
+retrieveNewListings()
 // retrieveNewOffers()
-retrieveFinished()
+// retrieveFinished()
