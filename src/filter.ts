@@ -59,7 +59,7 @@ const retrieveNewOffers = () => {
   })
 }
 
-/* ------- New Offers --------- */
+/* ------- Finished sales --------- */
 
 const retrieveFinished = () => {
   const finishedFilter = marketplace.contract.filters.SaleFinished()
