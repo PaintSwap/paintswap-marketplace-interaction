@@ -28,13 +28,9 @@ export class MarketplaceV3Utils {
     const base = MarketplaceV3Utils.splitBundleBase(bundle)
     return base.map((value): V3.Priced => {
       return {
-        marketplaceId: value.marketplaceId,
-        collection: value.collection,
-        amountPerBundleUnit: value.amountPerBundleUnit,
-        tokenID: value.tokenID,
+        ...value,
+        ...bundle,
         amount: bundle.amount.mul(value.amountPerBundleUnit),
-        pricePerUnit: bundle.pricePerUnit, // in case of a bundle every NFT will show as the same price, as we simply don't know
-        priceTotal: bundle.priceTotal,
       }
     })
   }
@@ -42,17 +38,8 @@ export class MarketplaceV3Utils {
   static splitBundleSold(bundle: V3.BundleSold): Array<V3.Sold> {
     return MarketplaceV3Utils.splitBundlePriced(bundle).map((value): V3.Sold => {
       return {
-        marketplaceId: value.marketplaceId,
-        offerId: bundle.offerId,
-        collection: value.collection,
-        amountPerBundleUnit: value.amountPerBundleUnit,
-        tokenID: value.tokenID,
-        amount: value.amount,
-        pricePerUnit: value.pricePerUnit,
-        priceTotal: value.priceTotal,
-        buyer: bundle.buyer,
-        seller: bundle.seller,
-        event: bundle.event,
+        ...value,
+        ...bundle,
       }
     })
   }
@@ -60,18 +47,8 @@ export class MarketplaceV3Utils {
   static splitBundleNewSale(bundle: V3.NewBundleListing): Array<V3.NewListing> {
     return MarketplaceV3Utils.splitBundlePriced(bundle).map((value): V3.NewListing => {
       return {
-        marketplaceId: value.marketplaceId,
-        collection: value.collection,
-        amountPerBundleUnit: value.amountPerBundleUnit,
-        tokenID: value.tokenID,
-        amount: value.amount,
-        pricePerUnit: value.pricePerUnit,
-        priceTotal: value.priceTotal,
-        duration: bundle.duration,
-        seller: bundle.seller,
-        isAuction: bundle.isAuction,
-        isNSFW: bundle.isNSFW,
-        event: bundle.event,
+        ...value,
+        ...bundle,
       }
     })
   }
@@ -80,14 +57,8 @@ export class MarketplaceV3Utils {
     const asBase = bundle as unknown as V3.BundleBase
     return MarketplaceV3Utils.splitBundleBase(asBase).map(
       (value): V3.NewOffer => ({
-        marketplaceId: value.marketplaceId,
-        collection: value.collection,
-        tokenID: value.tokenID,
-        price: bundle.price,
-        expires: bundle.expires,
-        from: bundle.from,
-        offerId: bundle.offerId,
-        event: bundle.event,
+        ...value,
+        ...bundle,
       }),
     )
   }
@@ -104,33 +75,11 @@ export class MarketplaceV3 {
     this.contract = new ethers.Contract(address, MarketplaceV3ABI, providerOrSigner)
   }
 
-  handleNewListingAsBundle(
-    marketplaceId,
-    nfts,
-    tokenIds,
-    amountBatches,
-    price,
-    duration,
-    isAuction,
-    amount,
-    isNSFW,
-    searchKeywords,
-    routerAddresses,
-    seller,
-    event,
-  ): V3.NewBundleListing {
+  handleNewListingAsBundle(args, event): V3.NewBundleListing {
     const bundle: V3.NewBundleListing = {
-      marketplaceId,
-      nfts,
-      tokenIds,
-      amountBatches,
-      pricePerUnit: price,
-      priceTotal: price.mul(amount),
-      duration,
-      isAuction,
-      amount,
-      isNSFW,
-      seller,
+      ...args,
+      pricePerUnit: args.price,
+      priceTotal: args.price.mul(args.amount),
       event,
     }
     return bundle
@@ -140,8 +89,9 @@ export class MarketplaceV3 {
    * @param callback called for new listings, as bundles
    */
   onNewListingAsBundle(callback: (sale: V3.NewBundleListing) => void): void {
-    this.contract.on('NewSale', () => {
-      callback(this.handleNewListingAsBundle.apply(this, arguments as any))
+    this.contract.on('NewSale', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleNewListingAsBundle(event.args, event))
     })
   }
 
@@ -152,29 +102,11 @@ export class MarketplaceV3 {
     this.onNewListingAsBundle((bundle) => MarketplaceV3Utils.splitBundleNewSale(bundle).forEach(callback))
   }
 
-  handleSoldAsBundle(
-    marketplaceId,
-    nfts,
-    tokenIds,
-    amountBatches,
-    price,
-    buyer,
-    seller,
-    amount,
-    offerId,
-    event,
-  ): V3.BundleSold {
+  handleSoldAsBundle(args, event): V3.BundleSold {
     const bundle: V3.BundleSold = {
-      marketplaceId,
-      nfts,
-      tokenIds,
-      amountBatches,
-      pricePerUnit: price,
-      priceTotal: price.mul(amount),
-      buyer,
-      seller,
-      amount,
-      offerId,
+      ...args,
+      pricePerUnit: args.price,
+      priceTotal: args.price.mul(args.amount),
       event,
     }
     return bundle
@@ -184,8 +116,9 @@ export class MarketplaceV3 {
    * @param callback called for successfully sold items, as bundles
    */
   onSoldAsBundle(callback: (bundle: V3.BundleSold) => void): void {
-    this.contract.on('Sold', () => {
-      callback(this.handleSoldAsBundle.apply(this, arguments as any))
+    this.contract.on('Sold', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleSoldAsBundle(event.args, event))
     })
   }
 
@@ -196,9 +129,9 @@ export class MarketplaceV3 {
     this.onSoldAsBundle((bundle) => MarketplaceV3Utils.splitBundleSold(bundle).forEach(callback))
   }
 
-  handleFinished(marketplaceId, event): V3.SaleFinished {
+  handleFinished(args, event): V3.SaleFinished {
     const sale: V3.SaleFinished = {
-      marketplaceId,
+      ...args,
       event,
     }
     return sale
@@ -210,15 +143,16 @@ export class MarketplaceV3 {
    * @note sale may have been successful or not
    */
   onFinished(callback: (sale: V3.SaleFinished) => void): void {
-    this.contract.on('SaleFinished', () => {
-      callback(this.handleFinished.apply(this, arguments as any))
+    this.contract.on('SaleFinished', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleFinished(event.args, event))
     })
   }
 
-  handleCancelled(marketplaceId, nfts, tokenIds, amountBatches, event): V3.Cancelled {
+  handleCancelled(args, event): V3.Cancelled {
     // Not handled as individual pieces due to missing amountBatches information
     const sale: V3.Cancelled = {
-      marketplaceId,
+      ...args,
       event,
     }
     return sale
@@ -228,16 +162,16 @@ export class MarketplaceV3 {
    * @param callback called for cancelled sales
    */
   onCancelled(callback: (bundle: V3.Cancelled) => void): void {
-    this.contract.on('CancelledSale', () => {
-      callback(this.handleCancelled.apply(this, arguments as any))
+    this.contract.on('CancelledSale', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleCancelled(event.args, event))
     })
   }
 
-  handlePriceUpdate(marketplaceId, price, nfts, tokenIds, event): V3.PriceUpdate {
+  handlePriceUpdate(args, event): V3.PriceUpdate {
     // Not handled as individual pieces due to missing amountBatches information
     const sale: V3.PriceUpdate = {
-      marketplaceId,
-      price,
+      ...args,
       event,
     }
     return sale
@@ -247,15 +181,15 @@ export class MarketplaceV3 {
    * @param callback called for price updates to sales
    */
   onPriceUpdate(callback: (bundle: V3.PriceUpdate) => void): void {
-    this.contract.on('UpdatePrice', () => {
-      callback(this.handlePriceUpdate.apply(this, arguments as any))
+    this.contract.on('UpdatePrice', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handlePriceUpdate(event.args, event))
     })
   }
 
-  handleStartDelayed(marketplaceId, startTime, event): V3.StartDelayed {
+  handleStartDelayed(args, event): V3.StartDelayed {
     const sale: V3.StartDelayed = {
-      marketplaceId,
-      startTime,
+      ...args,
       event,
     }
     return sale
@@ -265,15 +199,15 @@ export class MarketplaceV3 {
    * @param callback called when sales are delayed
    */
   onStartDelayed(callback: (sale: V3.StartDelayed) => void): void {
-    this.contract.on('UpdateStartTime', () => {
-      callback(this.handleStartDelayed.apply(this, arguments as any))
+    this.contract.on('UpdateStartTime', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleStartDelayed(event.args, event))
     })
   }
 
-  handleDurationExtended(marketplaceId, endTime, event): V3.DurationExtended {
+  handleDurationExtended(args, event): V3.DurationExtended {
     const sale: V3.DurationExtended = {
-      marketplaceId,
-      endTime,
+      ...args,
       event,
     }
     return sale
@@ -283,17 +217,15 @@ export class MarketplaceV3 {
    * @param callback called when sales are extended
    */
   onDurationExtended(callback: (sale: V3.DurationExtended) => void): void {
-    this.contract.on('UpdateEndTime', () => {
-      callback(this.handleDurationExtended.apply(this, arguments as any))
+    this.contract.on('UpdateEndTime', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleDurationExtended(event.args, event))
     })
   }
 
-  handleNewBid(marketplaceId, bidder, bid, nextMinimum, event): V3.NewBid {
+  handleNewBid(args, event): V3.NewBid {
     const newBid: V3.NewBid = {
-      marketplaceId,
-      bidder,
-      bid,
-      nextMinimum,
+      ...args,
       event,
     }
     return newBid
@@ -304,32 +236,18 @@ export class MarketplaceV3 {
    * @note a new bid refunds the previously highest bid
    */
   onNewBid(callback: (bid: V3.NewBid) => void): void {
-    this.contract.on('NewBid', () => {
-      callback(this.handleNewBid.apply(this, arguments as any))
+    this.contract.on('NewBid', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleNewBid(event.args, event))
     })
   }
 
   // Returns a pair, second is a boolean which is true if the offer was made on a sale and false if it was outside a sale
-  handleNewOfferAsBundle(
-    offerId,
-    marketplaceId,
-    nfts,
-    tokenIds,
-    from,
-    price,
-    expires,
-    searchKeywords,
-    event,
-  ): [V3.NewBundleOffer, boolean] {
-    const isSaleOffer = BigNumber.from(marketplaceId).isZero()
+  handleNewOfferAsBundle(args, event): [V3.NewBundleOffer, boolean] {
+    const isSaleOffer = BigNumber.from(args.marketplaceId).isZero()
     const newOffer: V3.NewBundleOffer = {
-      marketplaceId: !isSaleOffer ? marketplaceId : null,
-      offerId,
-      nfts,
-      tokenIds,
-      from,
-      price,
-      expires,
+      ...args,
+      marketplaceId: !isSaleOffer ? args.marketplaceId : null,
       event,
     }
     return [newOffer, isSaleOffer]
@@ -339,8 +257,9 @@ export class MarketplaceV3 {
    * @param callback called for new offers, as bundles
    */
   onNewOfferAsBundle(callback: (offer: V3.NewBundleOffer, isSaleOffer: boolean) => void): void {
-    this.contract.on('NewOffer', () => {
-      const [newOffer, isSaleOffer] = this.handleNewOfferAsBundle.apply(this, arguments as any)
+    this.contract.on('NewOffer', (...args: any) => {
+      const event = args.slice(-1)[0]
+      const [newOffer, isSaleOffer] = this.handleNewOfferAsBundle(event.args, event)
       callback(newOffer, isSaleOffer)
     })
   }
@@ -354,9 +273,9 @@ export class MarketplaceV3 {
     )
   }
 
-  handleOfferRemoved(offerId, event): V3.OfferRemoved {
+  handleOfferRemoved(args, event): V3.OfferRemoved {
     const offer: V3.OfferRemoved = {
-      offerId,
+      ...args,
       event,
     }
     return offer
@@ -366,15 +285,15 @@ export class MarketplaceV3 {
    * @param callback called for removed offers
    */
   onOfferRemoved(callback: (offer: V3.OfferRemoved) => void): void {
-    this.contract.on('OfferRemoved', () => {
-      callback(this.handleOfferRemoved.apply(this, arguments as any))
+    this.contract.on('OfferRemoved', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleOfferRemoved(event.args, event))
     })
   }
 
-  handleOfferAccepted(offerId, marketplaceId, event): V3.OfferAccepted {
+  handleOfferAccepted(args, event): V3.OfferAccepted {
     const offer: V3.OfferAccepted = {
-      offerId,
-      marketplaceId,
+      ...args,
       event,
     }
     return offer
@@ -384,14 +303,15 @@ export class MarketplaceV3 {
    * @param callback called for accepted offers
    */
   onOfferAccepted(callback: (offer: V3.OfferAccepted) => void): void {
-    this.contract.on('OfferAccepted', () => {
-      callback(this.handleOfferAccepted.apply(this, arguments as any))
+    this.contract.on('OfferAccepted', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleOfferAccepted(event.args, event))
     })
   }
 
-  handleOfferRejected(offerId, event): V3.OfferRejected {
+  handleOfferRejected(args, event): V3.OfferRejected {
     const offer: V3.OfferRejected = {
-      offerId,
+      ...args,
       event,
     }
     return offer
@@ -401,16 +321,15 @@ export class MarketplaceV3 {
    * @param callback called for rejected offers
    */
   onOfferRejected(callback: (offer: V3.OfferRejected) => void): void {
-    this.contract.on('OfferRejected', () => {
-      callback(this.handleOfferRejected.apply(this, arguments as any))
+    this.contract.on('OfferRejected', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleOfferRejected(event.args, event))
     })
   }
 
-  handleOfferUpdated(offerId, newPrice, expires, event): V3.OfferUpdated {
+  handleOfferUpdated(args, event): V3.OfferUpdated {
     const offerUpdated: V3.OfferUpdated = {
-      offerId,
-      newPrice,
-      expires,
+      ...args,
       event,
     }
     return offerUpdated
@@ -420,8 +339,9 @@ export class MarketplaceV3 {
    * @param callback called for updated offers
    */
   onOfferUpdated(callback: (offer: V3.OfferUpdated) => void): void {
-    this.contract.on('UpdateOffer', () => {
-      callback(this.handleOfferUpdated.apply(this, arguments as any))
+    this.contract.on('UpdateOffer', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleOfferUpdated(event.args, event))
     })
   }
 

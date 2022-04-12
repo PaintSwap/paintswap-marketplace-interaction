@@ -27,9 +27,8 @@ const retrieveNewListings = () => {
   marketplace.contract.queryFilter(newSalesFilter, fromBlock, toBlock).then((newSales) => {
     // For each event retrieved...
     newSales.forEach((event) => {
-      // Apply the event arguments to the appropriate handler
-      // This idiom is an easy way to avoid having to explicitly pass the event arguments to the function
-      const bundle = marketplace.handleNewListingAsBundle.apply(marketplace, event.args as any)
+      // Pass to the appropriate handler
+      const bundle = marketplace.handleNewListingAsBundle(event.args, event)
       // console.log('Listing bundle:\n', bundle, '\n\n')
 
       // Some handlers return bundles, which can then be split into individual NFTs
@@ -49,7 +48,7 @@ const retrieveNewOffers = () => {
 
   marketplace.contract.queryFilter(newOffersFilter, fromBlock, toBlock).then((newOffers) => {
     newOffers.forEach((event) => {
-      const [bundle, isSaleOffer] = marketplace.handleNewOfferAsBundle.apply(marketplace, event.args as any)
+      const [bundle, isSaleOffer] = marketplace.handleNewOfferAsBundle(event.args, event)
       const split = MarketplaceV3Utils.splitBundleNewOffer(bundle)
       split.forEach((offer) => {
         console.log(`Offer (on a sale? ${isSaleOffer}):\n`, offer, '\n\n')
@@ -66,7 +65,7 @@ const retrieveFinished = () => {
 
   marketplace.contract.queryFilter(finishedFilter, fromBlock, toBlock).then((finished) => {
     finished.forEach((event) => {
-      const sale = marketplace.handleFinished.apply(marketplace, event.args as any)
+      const sale = marketplace.handleFinished(event.args, event)
       console.log(`Sale finished:\n`, sale, '\n\n')
     })
     console.log(finished.length, 'finished sales seen through filter')
