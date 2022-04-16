@@ -44,10 +44,6 @@ marketplace.onNewOffer((offer, isSaleOffer) => {
   console.log(`New offer (on a sale? ${isSaleOffer})\n`, offer)
 })
 
-marketplace.onOfferRemoved((offer) => {
-  console.log('Offer removed\n', offer)
-})
-
 marketplace.onOfferAccepted((offer) => {
   console.log('Offer accepted\n', offer)
 })
