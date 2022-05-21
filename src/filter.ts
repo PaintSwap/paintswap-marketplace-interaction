@@ -58,6 +58,20 @@ const retrieveNewOffers = () => {
   })
 }
 
+/* ------- Removed Offers --------- */
+
+const retrieveRemovedOffers = () => {
+  const removedOffersFilter = marketplace.contract.filters.OfferRemoved()
+
+  marketplace.contract.queryFilter(removedOffersFilter, fromBlock, toBlock).then((removedOffers) => {
+    removedOffers.forEach((event) => {
+      const offer = marketplace.handleOfferRemoved(event.args, event)
+        console.log(`Removed offer:\n`, offer, '\n\n')
+    })
+    console.log(removedOffers.length, 'removed offers seen through filter')
+  })
+}
+
 /* ------- Finished sales --------- */
 
 const retrieveFinished = () => {
@@ -74,6 +88,7 @@ const retrieveFinished = () => {
 
 /* ---------------------------- */
 // Enable only one to avoid scrambling the terminal, as they happen async
-retrieveNewListings()
-// retrieveNewOffers()
+// retrieveNewListings()
+retrieveNewOffers()
+// retrieveRemovedOffers()
 // retrieveFinished()
