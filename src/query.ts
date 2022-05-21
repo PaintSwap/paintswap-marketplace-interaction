@@ -8,7 +8,7 @@ const provider = new ethers.providers.JsonRpcProvider('https://rpc.ftm.tools/')
 
 const marketplace = new MarketplaceV3(provider)
 
-const QueryID = 30001 // https://paintswap.finance/marketplace/30001
+const QueryID = 300000 // https://paintswap.finance/marketplace/300000
 
 marketplace.getNextMarketplaceId().then((next: ethers.BigNumber) => {
   const current = next.sub(1)
