@@ -38,6 +38,11 @@
 			},
 			{
 				"internalType": "address",
+				"name": "_delegate1",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
 				"name": "_feePercentage",
 				"type": "address"
 			},
@@ -265,6 +270,85 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
+				"name": "marketplaceId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address[]",
+				"name": "nfts",
+				"type": "address[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256[]",
+				"name": "amountBatches",
+				"type": "uint256[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint128",
+				"name": "price",
+				"type": "uint128"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "duration",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "isAuction",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "isNSFW",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "searchKeywords",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "address[]",
+				"name": "addresses",
+				"type": "address[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "seller",
+				"type": "address"
+			}
+		],
+		"name": "NewTempListing",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
 				"name": "offerId",
 				"type": "uint256"
 			},
@@ -288,7 +372,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "OfferRejected",
+		"name": "OfferExpired",
 		"type": "event"
 	},
 	{
@@ -555,19 +639,13 @@
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_account",
-				"type": "address"
-			}
-		],
-		"name": "_hasTooManyOffers",
+		"inputs": [],
+		"name": "VERSION",
 		"outputs": [
 			{
-				"internalType": "bool",
+				"internalType": "uint256",
 				"name": "",
-				"type": "bool"
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -578,6 +656,11 @@
 			{
 				"internalType": "uint256",
 				"name": "_offerId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_tokenId",
 				"type": "uint256"
 			},
 			{
@@ -596,6 +679,11 @@
 			{
 				"internalType": "uint256",
 				"name": "_offerId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_marketplaceId",
 				"type": "uint256"
 			}
 		],
@@ -696,9 +784,9 @@
 				"type": "uint128[]"
 			},
 			{
-				"internalType": "bool[]",
+				"internalType": "bool[][]",
 				"name": "_flags",
-				"type": "bool[]"
+				"type": "bool[][]"
 			},
 			{
 				"internalType": "string[]",
@@ -706,9 +794,9 @@
 				"type": "string[]"
 			},
 			{
-				"internalType": "address[]",
+				"internalType": "address[][]",
 				"name": "_addresses",
-				"type": "address[]"
+				"type": "address[][]"
 			}
 		],
 		"name": "addSaleBatch",
@@ -743,6 +831,32 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "batchBuyEnabled",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "batchSalesEnabled",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -879,6 +993,19 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "collectionOffersEnabled",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -907,19 +1034,6 @@
 	{
 		"inputs": [],
 		"name": "devFeeAddress",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "devSalesFeeAddress",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -996,12 +1110,57 @@
 	},
 	{
 		"inputs": [],
+		"name": "endTimeCutOff",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "_offerIds",
+				"type": "uint256[]"
+			}
+		],
+		"name": "expireOffers",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "feePercentage",
 		"outputs": [
 			{
 				"internalType": "contract FeePercentage",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_marketplaceId",
+				"type": "uint256"
+			}
+		],
+		"name": "getEndTime",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -1127,19 +1286,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "isSellingEnabled",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -1153,6 +1299,39 @@
 			}
 		],
 		"name": "makeBid",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_nft",
+				"type": "address"
+			},
+			{
+				"internalType": "uint128",
+				"name": "_price",
+				"type": "uint128"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_duration",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "_autoConvertFTM",
+				"type": "bool"
+			},
+			{
+				"internalType": "string",
+				"name": "_searchKeywords",
+				"type": "string"
+			}
+		],
+		"name": "makeCollectionOffer",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
@@ -1578,19 +1757,6 @@
 	},
 	{
 		"inputs": [],
-		"name": "onlySellerAndHighestBidderCanEndSale",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "owner",
 		"outputs": [
 			{
@@ -1603,29 +1769,16 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "paintRouter",
+		"outputs": [
 			{
-				"internalType": "uint256",
-				"name": "_offerId",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
-		"name": "rejectOffer",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "_offerIds",
-				"type": "uint256[]"
-			}
-		],
-		"name": "rejectOffers",
-		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -1680,6 +1833,19 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "salesFeeAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -1696,11 +1862,11 @@
 		"inputs": [
 			{
 				"internalType": "bool",
-				"name": "_batchSalesEnabled",
+				"name": "_batchBuyEnabled",
 				"type": "bool"
 			}
 		],
-		"name": "setBatchSalesEnabled",
+		"name": "setBatchBuyEnabled",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -1734,6 +1900,19 @@
 	{
 		"inputs": [
 			{
+				"internalType": "bool",
+				"name": "_enabled",
+				"type": "bool"
+			}
+		],
+		"name": "setCollectionOffersEnabled",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "_delegate",
 				"type": "address"
@@ -1748,24 +1927,11 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_dev",
+				"name": "_delegate",
 				"type": "address"
 			}
 		],
-		"name": "setDevAddress",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_dev",
-				"type": "address"
-			}
-		],
-		"name": "setDevSalesAddress",
+		"name": "setDelegrate1",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -1792,6 +1958,24 @@
 			}
 		],
 		"name": "setEndTimeCutoff",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_dev",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_salesFee",
+				"type": "address"
+			}
+		],
+		"name": "setFeeAddresses",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -1891,19 +2075,6 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_maxStartTimeIncrement",
-				"type": "uint256"
-			}
-		],
-		"name": "setMaxStartTimeIncrement",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
 				"name": "_maxDuration",
 				"type": "uint256"
 			}
@@ -1981,38 +2152,12 @@
 	{
 		"inputs": [
 			{
-				"internalType": "bool",
-				"name": "_modifyInitialStartTime",
-				"type": "bool"
-			}
-		],
-		"name": "setModifyInitialStartTime",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "address",
 				"name": "_officialNFTDiscount",
 				"type": "address"
 			}
 		],
 		"name": "setOfficialNFTDiscount",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bool",
-				"name": "_enable",
-				"type": "bool"
-			}
-		],
-		"name": "setOnlySellerAndHighestBidderCanEndSale",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -2047,6 +2192,19 @@
 		"inputs": [
 			{
 				"internalType": "bool",
+				"name": "_batchSalesEnabled",
+				"type": "bool"
+			}
+		],
+		"name": "setSalesBatchEnabled",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
 				"name": "_enable",
 				"type": "bool"
 			}
@@ -2054,6 +2212,35 @@
 		"name": "setSlidingEndTimeForBidsEnabled",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "singleNFTListings",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -2089,6 +2276,25 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "tokenCustodyAmounts",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "tokens",
 		"outputs": [
@@ -2112,6 +2318,83 @@
 		"name": "transferOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "userBundleOffersMade",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "userCollectionOffersMade",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "userOffersMade",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
