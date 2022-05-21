@@ -66,7 +66,7 @@ const retrieveRemovedOffers = () => {
   marketplace.contract.queryFilter(removedOffersFilter, fromBlock, toBlock).then((removedOffers) => {
     removedOffers.forEach((event) => {
       const offer = marketplace.handleOfferRemoved(event.args, event)
-        console.log(`Removed offer:\n`, offer, '\n\n')
+      console.log(`Removed offer:\n`, offer, '\n\n')
     })
     console.log(removedOffers.length, 'removed offers seen through filter')
   })
