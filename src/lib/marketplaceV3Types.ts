@@ -127,11 +127,6 @@ export interface OfferAccepted {
   event?: ethers.Event
 }
 
-export interface OfferRejected {
-  offerId: BigNumber
-  event?: ethers.Event
-}
-
 export interface OfferUpdated {
   offerId: BigNumber
   newPrice: BigNumber

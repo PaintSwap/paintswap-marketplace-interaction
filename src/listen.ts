@@ -48,10 +48,6 @@ marketplace.onOfferAccepted((offer) => {
   console.log('Offer accepted\n', offer)
 })
 
-marketplace.onOfferRejected((offer) => {
-  console.log('Offer rejected\n', offer)
-})
-
 marketplace.onOfferUpdated((offer) => {
   console.log('Offer updated\n', offer)
 })

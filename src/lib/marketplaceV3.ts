@@ -291,24 +291,6 @@ export class MarketplaceV3 {
     })
   }
 
-  handleOfferRejected(args, event): V3.OfferRejected {
-    const offer: V3.OfferRejected = {
-      ...args,
-      event,
-    }
-    return offer
-  }
-
-  /**
-   * @param callback called for rejected offers
-   */
-  onOfferRejected(callback: (offer: V3.OfferRejected) => void): void {
-    this.contract.on('OfferRejected', (...args: any) => {
-      const event = args.slice(-1)[0]
-      callback(this.handleOfferRejected(event.args, event))
-    })
-  }
-
   handleOfferUpdated(args, event): V3.OfferUpdated {
     const offerUpdated: V3.OfferUpdated = {
       ...args,
