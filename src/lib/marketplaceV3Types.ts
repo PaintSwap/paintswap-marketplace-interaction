@@ -121,6 +121,11 @@ export interface NewOffer extends NewOfferBase {
   event?: ethers.Event
 }
 
+export interface OfferRemoved {
+  offerId: BigNumber
+  event?: ethers.Event
+}
+
 export interface OfferAccepted {
   offerId: BigNumber
   marketplaceId: BigNumber

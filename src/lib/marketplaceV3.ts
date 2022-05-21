@@ -273,6 +273,24 @@ export class MarketplaceV3 {
     )
   }
 
+  handleOfferRemoved(args, event): V3.OfferRemoved {
+    const offer: V3.OfferRemoved = {
+      ...args,
+      event,
+    }
+    return offer
+  }
+
+  /**
+   * @param callback called for removed offers
+   */
+  onOfferRemoved(callback: (offer: V3.OfferRemoved) => void): void {
+    this.contract.on('OfferRemoved', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleOfferRemoved(event.args, event))
+    })
+  }
+
   handleOfferAccepted(args, event): V3.OfferAccepted {
     const offer: V3.OfferAccepted = {
       ...args,
