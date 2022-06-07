@@ -3,7 +3,7 @@ import * as V3 from './marketplaceV3Types'
 import MarketplaceV3ABIRaw from '../abi/PaintSwapMarketplaceV3.json'
 
 export const MarketplaceV3ABI: ethers.ContractInterface = MarketplaceV3ABIRaw
-export const MarketplaceV3Address = '0x9526109Ad088Dda11584c8207b0F9f45b16A69F0'
+export const MarketplaceV3Address = '0x08A440098400f681adD4eE4f21b3965dAB5477A2'
 
 export class MarketplaceV3Utils {
   /** @internal */
