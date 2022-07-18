@@ -21,12 +21,12 @@ const retrieveNewListings = () => {
    * The last part is the event name, which does NOT necessarily match the usual function names
    * Look in marketplaceV3.ts :  this.contract.on('EVENT_NAME', ...)
    */
-  const newSalesFilter = marketplace.contract.filters.NewSale()
+  const filter = marketplace.contract.filters.NewSale()
 
   // Then here query with the filter
-  marketplace.contract.queryFilter(newSalesFilter, fromBlock, toBlock).then((newSales) => {
+  marketplace.contract.queryFilter(filter, fromBlock, toBlock).then((result) => {
     // For each event retrieved...
-    newSales.forEach((event) => {
+    result.forEach((event) => {
       // Pass to the appropriate handler
       const bundle = marketplace.handleNewListingAsBundle(event.args, event)
       // console.log('Listing bundle:\n', bundle, '\n\n')
@@ -37,58 +37,105 @@ const retrieveNewListings = () => {
         console.log('Listing:\n', listing, '\n\n')
       })
     })
-    console.log(newSales.length, 'sales seen through filter')
+    console.log(result.length, 'sales seen through filter')
   })
 }
 
 /* ------- New Offers --------- */
 
 const retrieveNewOffers = () => {
-  const newOffersFilter = marketplace.contract.filters.NewOffer()
+  const filter = marketplace.contract.filters.NewOffer()
 
-  marketplace.contract.queryFilter(newOffersFilter, fromBlock, toBlock).then((newOffers) => {
-    newOffers.forEach((event) => {
+  marketplace.contract.queryFilter(filter, fromBlock, toBlock).then((result) => {
+    result.forEach((event) => {
       const [bundle, isSaleOffer] = marketplace.handleNewOfferAsBundle(event.args, event)
       const split = MarketplaceV3Utils.splitBundleNewOffer(bundle)
       split.forEach((offer) => {
         console.log(`Offer (on a sale? ${isSaleOffer}):\n`, offer, '\n\n')
       })
     })
-    console.log(newOffers.length, 'offers seen through filter')
+    console.log(result.length, 'offers seen through filter')
+  })
+}
+
+/* ------- New Collectioin Offers --------- */
+
+const retrieveNewCollectionOffers = () => {
+  const filter = marketplace.contract.filters.NewCollectionOffer()
+
+  marketplace.contract.queryFilter(filter, fromBlock, toBlock).then((result) => {
+    result.forEach((event) => {
+      const offer = marketplace.handleNewCollectionOffer(event.args, event)
+      console.log(`New collection offer:\n`, offer, '\n\n')
+    })
+    console.log(result.length, 'New collection offers seen through filter')
+  })
+}
+
+/* ------- New Filtered Collectioin Offers --------- */
+
+const retrieveNewFilteredCollectionOffers = () => {
+  const filter = marketplace.contract.filters.NewFilteredCollectionOffer()
+
+  marketplace.contract.queryFilter(filter, fromBlock, toBlock).then((result) => {
+    result.forEach((event) => {
+      const offer = marketplace.handleNewFilteredCollectionOffer(event.args, event)
+      console.log(`New filtered collection offer:\n`, offer, '\n\n')
+    })
+    console.log(result.length, 'New filtered collection offers seen through filter')
   })
 }
 
 /* ------- Removed Offers --------- */
 
 const retrieveRemovedOffers = () => {
-  const removedOffersFilter = marketplace.contract.filters.OfferRemoved()
+  const filter = marketplace.contract.filters.OfferRemoved()
 
-  marketplace.contract.queryFilter(removedOffersFilter, fromBlock, toBlock).then((removedOffers) => {
-    removedOffers.forEach((event) => {
+  marketplace.contract.queryFilter(filter, fromBlock, toBlock).then((result) => {
+    result.forEach((event) => {
       const offer = marketplace.handleOfferRemoved(event.args, event)
       console.log(`Removed offer:\n`, offer, '\n\n')
     })
-    console.log(removedOffers.length, 'removed offers seen through filter')
+    console.log(result.length, 'removed offers seen through filter')
   })
 }
+
+/* ------- Accepted Offers --------- */
+
+const retrieveAcceptedOffers = () => {
+  const filter = marketplace.contract.filters.OfferAccepted()
+
+  marketplace.contract.queryFilter(filter, fromBlock, toBlock).then((result) => {
+    result.forEach((event) => {
+      const offer = marketplace.handleOfferAccepted(event.args, event)
+      console.log(`Accepted offer:\n`, offer, '\n\n')
+    })
+    console.log(result.length, 'accepted offers seen through filter')
+  })
+}
+
 
 /* ------- Finished sales --------- */
 
 const retrieveFinished = () => {
-  const finishedFilter = marketplace.contract.filters.SaleFinished()
+  const filter = marketplace.contract.filters.SaleFinished()
 
-  marketplace.contract.queryFilter(finishedFilter, fromBlock, toBlock).then((finished) => {
-    finished.forEach((event) => {
+  marketplace.contract.queryFilter(filter, fromBlock, toBlock).then((result) => {
+    result.forEach((event) => {
       const sale = marketplace.handleFinished(event.args, event)
       console.log(`Sale finished:\n`, sale, '\n\n')
     })
-    console.log(finished.length, 'finished sales seen through filter')
+    console.log(result.length, 'finished sales seen through filter')
   })
 }
 
+
 /* ---------------------------- */
 // Enable only one to avoid scrambling the terminal, as they happen async
-// retrieveNewListings()
-retrieveNewOffers()
+retrieveNewListings()
+// retrieveNewOffers()
+// retrieveNewCollectionOffers()
+// retrieveNewFilteredCollectionOffers()
 // retrieveRemovedOffers()
+// retrieveAcceptedOffers()
 // retrieveFinished()

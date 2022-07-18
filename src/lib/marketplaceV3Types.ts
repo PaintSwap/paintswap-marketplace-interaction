@@ -15,7 +15,7 @@ export interface BundlePriced extends BundleBase {
 
 export interface Base {
   marketplaceId: BigNumber
-  collection: string
+  nft: string
   tokenID: BigNumber
   amountPerBundleUnit: BigNumber
 }
@@ -33,6 +33,8 @@ interface NewListingBase {
   isAuction: boolean
   isNSFW: boolean
   seller: string
+  antisnipe: boolean
+  flashAuction: boolean
 }
 
 export interface NewBundleListing extends BundlePriced, NewListingBase {
@@ -106,6 +108,7 @@ export interface NewOfferBase {
   from: string
   expires: BigNumber // as defined by solidity, seconds since the unix epoch
   price: BigNumber
+  quantity: BigNumber
 }
 
 export interface NewBundleOffer extends NewOfferBase {
@@ -116,7 +119,7 @@ export interface NewBundleOffer extends NewOfferBase {
 
 // NewBundleOffer splits into NewOffer
 export interface NewOffer extends NewOfferBase {
-  collection: string
+  nft: string
   tokenID: BigNumber
   event?: ethers.Event
 }
@@ -128,15 +131,43 @@ export interface OfferRemoved {
 
 export interface OfferAccepted {
   offerId: BigNumber
+  nft: string
+  tokenId: BigNumber
+  quantity: BigNumber
   marketplaceId: BigNumber
   event?: ethers.Event
 }
 
 export interface OfferUpdated {
+  nft: string
+  tokenId: BigNumber
+  quantity: BigNumber
   offerId: BigNumber
   newPrice: BigNumber
   expires: BigNumber // as defined by solidity, seconds since the unix epoch
   event?: ethers.Event
+}
+
+// -----------
+
+export interface NewCollectionOffer {
+  offerId: BigNumber
+  nft: string
+  from: string
+  quantity: BigNumber
+  price: BigNumber
+  expires: BigNumber // as defined by solidity, seconds since the unix epoch
+}
+
+export interface NewFilteredCollectionOffer {
+  offerId: BigNumber
+  nft: string
+  tokenIds: Array<BigNumber>
+  from: string
+  quantity: BigNumber
+  price: BigNumber // if prices array is populated, disregard this
+  prices: Array<BigNumber> // if not all the same price uses array
+  expires: BigNumber // as defined by solidity, seconds since the unix epoch
 }
 
 // -----------

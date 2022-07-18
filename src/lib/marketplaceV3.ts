@@ -3,7 +3,7 @@ import * as V3 from './marketplaceV3Types'
 import MarketplaceV3ABIRaw from '../abi/PaintSwapMarketplaceV3.json'
 
 export const MarketplaceV3ABI: ethers.ContractInterface = MarketplaceV3ABIRaw
-export const MarketplaceV3Address = '0x9A5EFD94920f0391A50094d55Fd6111eE079d048'
+export const MarketplaceV3Address = '0xf3df7b6dccc267393784a3876d0cbcbdc73147d4'
 
 export class MarketplaceV3Utils {
   /** @internal */
@@ -14,7 +14,7 @@ export class MarketplaceV3Utils {
     for (let i = 0; i < pieces; ++i) {
       const base: V3.Base = {
         marketplaceId: bundle.marketplaceId,
-        collection: bundle.nfts[i],
+        nft: bundle.nfts[i],
         tokenID: bundle.tokenIds[i],
         amountPerBundleUnit: bundle.amountBatches ? bundle.amountBatches[i] : null,
       }
@@ -326,6 +326,43 @@ export class MarketplaceV3 {
       callback(this.handleOfferUpdated(event.args, event))
     })
   }
+
+  handleNewCollectionOffer(args, event): V3.NewCollectionOffer {
+    const newCollectionOffer: V3.NewCollectionOffer = {
+      ...args,
+      event,
+    }
+    return newCollectionOffer
+  }
+
+  /**
+   * @param callback called for new collection offers
+   */
+  onNewCollectionOffer(callback: (offer: V3.NewCollectionOffer) => void): void {
+    this.contract.on('NewCollectionOffer', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleNewCollectionOffer(event.args, event))
+    })
+  }
+
+  handleNewFilteredCollectionOffer(args, event): V3.NewFilteredCollectionOffer {
+    const newFilteredCollectionOffer: V3.NewFilteredCollectionOffer = {
+      ...args,
+      event,
+    }
+    return newFilteredCollectionOffer
+  }
+
+  /**
+   * @param callback called for new filtered collection offers, i.e., on specific tokenIDs
+   */
+  onNewFilteredCollectionOffer(callback: (offer: V3.NewFilteredCollectionOffer) => void): void {
+    this.contract.on('NewFilteredCollectionOffer', (...args: any) => {
+      const event = args.slice(-1)[0]
+      callback(this.handleNewFilteredCollectionOffer(event.args, event))
+    })
+  }
+
 
   /**
    * @param marketplaceId the sale ID for which to grab details. The one that goes into https://paintswap.finance/marketplace/<ID>
