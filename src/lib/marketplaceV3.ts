@@ -363,7 +363,6 @@ export class MarketplaceV3 {
     })
   }
 
-
   /**
    * @param marketplaceId the sale ID for which to grab details. The one that goes into https://paintswap.finance/marketplace/<ID>
    * @returns a SaleDetails objects with details about this sale

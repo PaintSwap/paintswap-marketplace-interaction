@@ -114,7 +114,6 @@ const retrieveAcceptedOffers = () => {
   })
 }
 
-
 /* ------- Finished sales --------- */
 
 const retrieveFinished = () => {
@@ -128,7 +127,6 @@ const retrieveFinished = () => {
     console.log(result.length, 'finished sales seen through filter')
   })
 }
-
 
 /* ---------------------------- */
 // Enable only one to avoid scrambling the terminal, as they happen async
