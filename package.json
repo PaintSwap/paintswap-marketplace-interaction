@@ -23,6 +23,7 @@
   "scripts": {
     "listen": "yarn ts-node src/listen.ts",
     "query": "yarn ts-node src/query.ts",
+    "filter": "yarn ts-node src/filter.ts",
     "build": "rm -rf ./dist/* && tsc",
     "prepare": "yarn build",
     "prepublishOnly": "yarn lint",
@@ -56,8 +57,8 @@
     "eslint-plugin-promise": "^5.1.1",
     "prettier": "^2.5.0",
     "run-script-os": "^1.1.6",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.2",
-    "typedoc": "latest"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4",
+    "typedoc": "^0.23.8"
   }
 }

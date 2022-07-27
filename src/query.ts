@@ -2,23 +2,23 @@
 /* eslint-disable no-console */
 
 import { ethers } from 'ethers'
-import { MarketplaceV2, SaleDetails } from './lib'
+import { MarketplaceV3 } from './lib'
 
 const provider = new ethers.providers.JsonRpcProvider('https://rpc.ftm.tools/')
 
-const marketplace = new MarketplaceV2(provider)
+const marketplace = new MarketplaceV3(provider)
 
-const QueryID = 68897 // https://paintswap.finance/marketplace/68897
+const QueryID = 300000 // https://paintswap.finance/marketplace/300000
 
 marketplace.getNextMarketplaceId().then((next: ethers.BigNumber) => {
   const current = next.sub(1)
   console.log(`The latest sale on the marketplace is ID ${current} : https://paintswap.finance/marketplace/${current}`)
 })
 
-marketplace.getSaleDetails(ethers.BigNumber.from(QueryID)).then((details: SaleDetails) => {
+marketplace.getSaleDetails(ethers.BigNumber.from(QueryID)).then((details) => {
   console.log(`Sale details for sale ${QueryID}:\n`, details)
 })
 
-marketplace.getNextMinimumBidOrOffer(ethers.BigNumber.from(QueryID)).then((next) => {
-  console.log(`Next minimum bid or offer for sale ${QueryID}: `, `${ethers.utils.formatEther(next.toString())} $FTM`)
+marketplace.getNextMinimumBid(ethers.BigNumber.from(QueryID)).then((next) => {
+  console.log(`Next minimum bid for sale ${QueryID}: `, `${ethers.utils.formatEther(next.toString())} $FTM`)
 })
