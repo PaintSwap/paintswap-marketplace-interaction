@@ -412,6 +412,91 @@
 		"inputs": [
 			{
 				"indexed": false,
+				"internalType": "uint256[]",
+				"name": "marketplaceId",
+				"type": "uint256[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "address[][]",
+				"name": "nfts",
+				"type": "address[][]"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256[][]",
+				"name": "tokenIds",
+				"type": "uint256[][]"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256[][]",
+				"name": "amountBatches",
+				"type": "uint256[][]"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint128[]",
+				"name": "prices",
+				"type": "uint128[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256[]",
+				"name": "durations",
+				"type": "uint256[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool[]",
+				"name": "isAuctions",
+				"type": "bool[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool[]",
+				"name": "isAntisnipes",
+				"type": "bool[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256[]",
+				"name": "amounts",
+				"type": "uint256[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool[]",
+				"name": "isNSFWs",
+				"type": "bool[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "string[]",
+				"name": "searchKeywords",
+				"type": "string[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "address[][]",
+				"name": "addresses",
+				"type": "address[][]"
+			},
+			{
+				"indexed": false,
+				"internalType": "address[]",
+				"name": "sellers",
+				"type": "address[]"
+			}
+		],
+		"name": "NewSaleBatch",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
 				"internalType": "uint256",
 				"name": "marketplaceId",
 				"type": "uint256"
@@ -998,6 +1083,65 @@
 			}
 		],
 		"name": "addSale",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address[][]",
+				"name": "_nfts",
+				"type": "address[][]"
+			},
+			{
+				"internalType": "uint256[][]",
+				"name": "_tokenIds",
+				"type": "uint256[][]"
+			},
+			{
+				"internalType": "uint256[][]",
+				"name": "_amountBatches",
+				"type": "uint256[][]"
+			},
+			{
+				"internalType": "uint128[]",
+				"name": "_prices",
+				"type": "uint128[]"
+			},
+			{
+				"internalType": "uint64[][]",
+				"name": "_times",
+				"type": "uint64[][]"
+			},
+			{
+				"internalType": "uint128[]",
+				"name": "_amounts",
+				"type": "uint128[]"
+			},
+			{
+				"internalType": "bool[][]",
+				"name": "_flags",
+				"type": "bool[][]"
+			},
+			{
+				"internalType": "string[]",
+				"name": "_searchKeywords",
+				"type": "string[]"
+			},
+			{
+				"internalType": "address[][]",
+				"name": "_addresses",
+				"type": "address[][]"
+			}
+		],
+		"name": "addSaleBatch",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1764,6 +1908,44 @@
 			}
 		],
 		"name": "makeFilteredCollectionOffer",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "_nfts",
+				"type": "address[]"
+			},
+			{
+				"internalType": "uint256[][]",
+				"name": "_tokenIds",
+				"type": "uint256[][]"
+			},
+			{
+				"internalType": "uint128[]",
+				"name": "_quantities",
+				"type": "uint128[]"
+			},
+			{
+				"internalType": "uint128[][]",
+				"name": "_prices",
+				"type": "uint128[][]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_durations",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "string[][]",
+				"name": "_searchKeywords",
+				"type": "string[][]"
+			}
+		],
+		"name": "makeFilteredCollectionOfferBatch",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
