@@ -3,19 +3,19 @@ import { ethers, BigNumber } from 'ethers'
 // -----------
 
 export interface Listing {
-  nft:string
-  tokenId:BigNumber
-  price:BigNumber
-  duration:Number
-  amount:Number
-  isUsingVault:Boolean
-  isAuction:Boolean
-  isAntisnipe:Boolean
-  isFlashAuction:Boolean
-  isNSFW:Boolean
-  searchKeywords:string
-  donationAddress:string
-  donationPercent:Number
+  nft: string
+  tokenId: BigNumber
+  price: BigNumber
+  duration: Number
+  amount: Number
+  isUsingVault: Boolean
+  isAuction: Boolean
+  isAntisnipe: Boolean
+  isFlashAuction: Boolean
+  isNSFW: Boolean
+  searchKeywords: string
+  donationAddress: string
+  donationPercent: Number
 }
 
 export interface NewListing {
