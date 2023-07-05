@@ -139,10 +139,10 @@ export interface OfferAccepted {
 }
 
 export interface OfferUpdated {
+  offerId: BigNumber
   nft: string
   tokenId: BigNumber
   quantity: BigNumber
-  offerId: BigNumber
   newPrice: BigNumber
   expires: BigNumber // as defined by solidity, seconds since the unix epoch
   event?: ethers.Event
