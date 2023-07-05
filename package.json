@@ -29,6 +29,7 @@
     "filterNew": "yarn ts-node src/filterNew.ts",
     "build": "rm -rf ./dist/* && tsc",
     "prepare": "yarn build",
+    "preinstall": "yarn build",
     "prepublishOnly": "yarn lint",
     "preversion": "yarn lint",
     "version": "yarn format:write && git add -A src",
