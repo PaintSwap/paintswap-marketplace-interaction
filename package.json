@@ -27,17 +27,15 @@
     "queryNew": "yarn ts-node src/queryNew.ts",
     "filter": "yarn ts-node src/filter.ts",
     "filterNew": "yarn ts-node src/filterNew.ts",
-    "build": "rimraf \"./dist\" && tsc",
     "prepare": "yarn build",
-    "preinstall": "yarn build",
-    "prepublishOnly": "yarn lint",
-    "preversion": "yarn lint",
+    "build": "yarn build:tsc",
+    "build:tsc": "tsc",
     "version": "yarn format:write && git add -A src",
     "postversion": "git push && git push --tags",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
-    "format:check": "prettier --check --loglevel warn 'src/**/*.{js,jsx,ts,tsx}'",
+    "format:check": "prettier --check --loglevel warn \"src/**/*.{js,jsx,ts,tsx}\"",
     "format:write": "run-script-os",
-    "format:write:windows": "prettier --write src/**/*.{js,jsx,ts,tsx}",
+    "format:write:windows": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "format:write:default": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
     "format:check-files": "prettier --check --loglevel warn"
   },
@@ -48,8 +46,7 @@
   },
   "homepage": "https://github.com/PaintSwap/paintswap-marketplace-interaction",
   "dependencies": {
-    "ethers": "^5.5.1",
-    "rimraf": "^5.0.5"
+    "ethers": "^5.5.1"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",
