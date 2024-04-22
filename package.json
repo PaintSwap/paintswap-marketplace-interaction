@@ -48,7 +48,8 @@
   },
   "homepage": "https://github.com/PaintSwap/paintswap-marketplace-interaction",
   "dependencies": {
-    "ethers": "^5.5.1"
+    "ethers": "^5.5.1",
+    "rimraf": "^5.0.5"
   },
   "devDependencies": {
     "@types/node": "^16.11.10",
@@ -60,7 +61,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
     "prettier": "^2.5.0",
-    "rimraf": "^5.0.5",
     "run-script-os": "^1.1.6",
     "ts-node": "^10.9.1",
     "typedoc": "^0.23.8",
