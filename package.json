@@ -22,11 +22,8 @@
   ],
   "scripts": {
     "listen": "yarn ts-node src/listen.ts",
-    "listenNew": "yarn ts-node src/listenNew.ts",
     "query": "yarn ts-node src/query.ts",
-    "queryNew": "yarn ts-node src/queryNew.ts",
     "filter": "yarn ts-node src/filter.ts",
-    "filterNew": "yarn ts-node src/filterNew.ts",
     "prepare": "yarn build",
     "build": "yarn build:tsc",
     "build:tsc": "tsc",

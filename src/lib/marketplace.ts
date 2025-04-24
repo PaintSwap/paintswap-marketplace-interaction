@@ -1,11 +1,27 @@
 import { BigNumber, ethers } from 'ethers'
-import * as V1 from './marketplaceTypes'
 import MarketplaceABIRaw from '../abi/PaintSwapMarketplace.json'
+import {
+  Cancelled,
+  DurationExtended,
+  NewBid,
+  NewCollectionOffer,
+  NewFilteredCollectionOffer,
+  NewListing,
+  NewListingBatch,
+  NewOffer,
+  OfferAccepted,
+  OfferRemoved,
+  OfferUpdated,
+  PriceUpdate,
+  SaleDetails,
+  SaleFinished,
+  Sold,
+} from './marketplaceTypes'
 
 export const MarketplaceABI: ethers.ContractInterface = MarketplaceABIRaw
-export const MarketplaceAddress = '0xeb8E5876Eb79c628929944dDf3521Ad893d57827'
+export const MarketplaceAddress = '0x0c558365eeff4b057fdbed91bc3650e1a00018b4' // Sonic Mainnet
 
-export class MarketplaceV1 {
+export class Marketplace {
   contract: ethers.Contract
 
   /**
@@ -16,7 +32,7 @@ export class MarketplaceV1 {
     this.contract = new ethers.Contract(address, MarketplaceABI, providerOrSigner)
   }
 
-  handleNewListing(args, event): V1.NewListing {
+  handleNewListing(args, event): NewListing {
     return {
       ...args,
       event,
@@ -26,14 +42,14 @@ export class MarketplaceV1 {
   /**
    * @param callback called for new listings, as individual NFTs
    */
-  onNewListing(callback: (sale: V1.NewListing) => void): void {
+  onNewListing(callback: (sale: NewListing) => void): void {
     this.contract.on('NewListing', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleNewListing(event.args, event))
     })
   }
 
-  handleNewListingBatch(args, event): V1.NewListingBatch {
+  handleNewListingBatch(args, event): NewListingBatch {
     return {
       ...args,
       event,
@@ -43,14 +59,14 @@ export class MarketplaceV1 {
   /**
    * @param callback called for new listings as a batch, as individual NFTs
    */
-  onNewListingBatch(callback: (sales: V1.NewListingBatch) => void): void {
+  onNewListingBatch(callback: (sales: NewListingBatch) => void): void {
     this.contract.on('NewListingBatch', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleNewListingBatch(event.args, event))
     })
   }
 
-  handleSold(args, event): V1.Sold {
+  handleSold(args, event): Sold {
     return {
       ...args,
       event,
@@ -60,15 +76,15 @@ export class MarketplaceV1 {
   /**
    * @param callback called for successfuly sold items, as individual NFTs
    */
-  onSold(callback: (sale: V1.Sold) => void): void {
+  onSold(callback: (sale: Sold) => void): void {
     this.contract.on('Sold', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleSold(event.args, event))
     })
   }
 
-  handleFinished(args, event): V1.SaleFinished {
-    const sale: V1.SaleFinished = {
+  handleFinished(args, event): SaleFinished {
+    const sale: SaleFinished = {
       ...args,
       event,
     }
@@ -80,16 +96,16 @@ export class MarketplaceV1 {
    * @note does not provide cancelled sales
    * @note sale may have been successful or not
    */
-  onFinished(callback: (sale: V1.SaleFinished) => void): void {
+  onFinished(callback: (sale: SaleFinished) => void): void {
     this.contract.on('SaleFinished', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleFinished(event.args, event))
     })
   }
 
-  handleCancelled(args, event): V1.Cancelled {
+  handleCancelled(args, event): Cancelled {
     // Not handled as individual pieces due to missing amountBatches information
-    const sale: V1.Cancelled = {
+    const sale: Cancelled = {
       ...args,
       event,
     }
@@ -99,16 +115,16 @@ export class MarketplaceV1 {
   /**
    * @param callback called for cancelled sales
    */
-  onCancelled(callback: (bundle: V1.Cancelled) => void): void {
+  onCancelled(callback: (bundle: Cancelled) => void): void {
     this.contract.on('CancelledSale', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleCancelled(event.args, event))
     })
   }
 
-  handlePriceUpdate(args, event): V1.PriceUpdate {
+  handlePriceUpdate(args, event): PriceUpdate {
     // Not handled as individual pieces due to missing amountBatches information
-    const sale: V1.PriceUpdate = {
+    const sale: PriceUpdate = {
       ...args,
       event,
     }
@@ -118,15 +134,15 @@ export class MarketplaceV1 {
   /**
    * @param callback called for price updates to sales
    */
-  onPriceUpdate(callback: (bundle: V1.PriceUpdate) => void): void {
+  onPriceUpdate(callback: (bundle: PriceUpdate) => void): void {
     this.contract.on('UpdatePrice', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handlePriceUpdate(event.args, event))
     })
   }
 
-  handleDurationExtended(args, event): V1.DurationExtended {
-    const sale: V1.DurationExtended = {
+  handleDurationExtended(args, event): DurationExtended {
+    const sale: DurationExtended = {
       ...args,
       event,
     }
@@ -136,15 +152,15 @@ export class MarketplaceV1 {
   /**
    * @param callback called when sales are extended
    */
-  onDurationExtended(callback: (sale: V1.DurationExtended) => void): void {
+  onDurationExtended(callback: (sale: DurationExtended) => void): void {
     this.contract.on('UpdateEndTime', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleDurationExtended(event.args, event))
     })
   }
 
-  handleNewBid(args, event): V1.NewBid {
-    const newBid: V1.NewBid = {
+  handleNewBid(args, event): NewBid {
+    const newBid: NewBid = {
       ...args,
       event,
     }
@@ -155,16 +171,16 @@ export class MarketplaceV1 {
    * @param callback called for new bids on auctions
    * @note a new bid refunds the previously highest bid
    */
-  onNewBid(callback: (bid: V1.NewBid) => void): void {
+  onNewBid(callback: (bid: NewBid) => void): void {
     this.contract.on('NewBid', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleNewBid(event.args, event))
     })
   }
 
-  handleNewOffer(args, event): [V1.NewOffer, boolean] {
+  handleNewOffer(args, event): [NewOffer, boolean] {
     const isSaleOffer = BigNumber.from(args.marketplaceId).isZero()
-    const newOffer: V1.NewOffer = {
+    const newOffer: NewOffer = {
       ...args,
       marketplaceId: !isSaleOffer ? args.marketplaceId : null,
       event,
@@ -175,15 +191,15 @@ export class MarketplaceV1 {
   /**
    * @param callback called for new offers, as bundles
    */
-  onNewOffer(callback: (offer: V1.NewOffer, isSaleOffer: boolean) => void): void {
+  onNewOffer(callback: (offer: NewOffer, isSaleOffer: boolean) => void): void {
     this.contract.on('NewOffer', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(...this.handleNewOffer(event.args, event))
     })
   }
 
-  handleOfferRemoved(args, event): V1.OfferRemoved {
-    const offer: V1.OfferRemoved = {
+  handleOfferRemoved(args, event): OfferRemoved {
+    const offer: OfferRemoved = {
       ...args,
       event,
     }
@@ -193,15 +209,15 @@ export class MarketplaceV1 {
   /**
    * @param callback called for removed offers
    */
-  onOfferRemoved(callback: (offer: V1.OfferRemoved) => void): void {
+  onOfferRemoved(callback: (offer: OfferRemoved) => void): void {
     this.contract.on('OfferRemoved', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleOfferRemoved(event.args, event))
     })
   }
 
-  handleOfferAccepted(args, event): V1.OfferAccepted {
-    const offer: V1.OfferAccepted = {
+  handleOfferAccepted(args, event): OfferAccepted {
+    const offer: OfferAccepted = {
       ...args,
       event,
     }
@@ -211,15 +227,15 @@ export class MarketplaceV1 {
   /**
    * @param callback called for accepted offers
    */
-  onOfferAccepted(callback: (offer: V1.OfferAccepted) => void): void {
+  onOfferAccepted(callback: (offer: OfferAccepted) => void): void {
     this.contract.on('OfferAccepted', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleOfferAccepted(event.args, event))
     })
   }
 
-  handleOfferUpdated(args, event): V1.OfferUpdated {
-    const offerUpdated: V1.OfferUpdated = {
+  handleOfferUpdated(args, event): OfferUpdated {
+    const offerUpdated: OfferUpdated = {
       ...args,
       event,
     }
@@ -229,15 +245,15 @@ export class MarketplaceV1 {
   /**
    * @param callback called for updated offers
    */
-  onOfferUpdated(callback: (offer: V1.OfferUpdated) => void): void {
+  onOfferUpdated(callback: (offer: OfferUpdated) => void): void {
     this.contract.on('UpdateOffer', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleOfferUpdated(event.args, event))
     })
   }
 
-  handleNewCollectionOffer(args, event): V1.NewCollectionOffer {
-    const newCollectionOffer: V1.NewCollectionOffer = {
+  handleNewCollectionOffer(args, event): NewCollectionOffer {
+    const newCollectionOffer: NewCollectionOffer = {
       ...args,
       event,
     }
@@ -247,15 +263,15 @@ export class MarketplaceV1 {
   /**
    * @param callback called for new collection offers
    */
-  onNewCollectionOffer(callback: (offer: V1.NewCollectionOffer) => void): void {
+  onNewCollectionOffer(callback: (offer: NewCollectionOffer) => void): void {
     this.contract.on('NewCollectionOffer', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleNewCollectionOffer(event.args, event))
     })
   }
 
-  handleNewFilteredCollectionOffer(args, event): V1.NewFilteredCollectionOffer {
-    const newFilteredCollectionOffer: V1.NewFilteredCollectionOffer = {
+  handleNewFilteredCollectionOffer(args, event): NewFilteredCollectionOffer {
+    const newFilteredCollectionOffer: NewFilteredCollectionOffer = {
       ...args,
       event,
     }
@@ -265,7 +281,7 @@ export class MarketplaceV1 {
   /**
    * @param callback called for new filtered collection offers, i.e., on specific tokenIDs
    */
-  onNewFilteredCollectionOffer(callback: (offer: V1.NewFilteredCollectionOffer) => void): void {
+  onNewFilteredCollectionOffer(callback: (offer: NewFilteredCollectionOffer) => void): void {
     this.contract.on('NewFilteredCollectionOffer', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleNewFilteredCollectionOffer(event.args, event))
@@ -276,9 +292,9 @@ export class MarketplaceV1 {
    * @param marketplaceId the sale ID for which to grab details. The one that goes into https://paintswap.finance/marketplace/<ID>
    * @returns a SaleDetails objects with details about this sale
    */
-  async getSaleDetails(marketplaceId: ethers.BigNumber): Promise<V1.SaleDetails> {
+  async getSaleDetails(marketplaceId: ethers.BigNumber): Promise<SaleDetails> {
     return this.contract.getSaleDetails(marketplaceId).then(
-      (details: any): V1.SaleDetails => ({
+      (details: any): SaleDetails => ({
         ...details,
       }),
     )
@@ -294,4 +310,4 @@ export class MarketplaceV1 {
   }
 }
 
-export default MarketplaceV1
+export default Marketplace

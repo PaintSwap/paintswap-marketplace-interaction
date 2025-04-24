@@ -26,14 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MarketplaceTypes = exports.MarketplaceV3Types = exports.MarketplaceV2Types = exports.MarketplaceV1 = exports.MarketplaceV3Utils = exports.MarketplaceV3 = exports.MarketplaceV2 = void 0;
-var marketplaceV2_1 = require("./marketplaceV2");
-Object.defineProperty(exports, "MarketplaceV2", { enumerable: true, get: function () { return __importDefault(marketplaceV2_1).default; } });
-var marketplaceV3_1 = require("./marketplaceV3");
-Object.defineProperty(exports, "MarketplaceV3", { enumerable: true, get: function () { return marketplaceV3_1.MarketplaceV3; } });
-Object.defineProperty(exports, "MarketplaceV3Utils", { enumerable: true, get: function () { return marketplaceV3_1.MarketplaceV3Utils; } });
+exports.MarketplaceTypes = exports.Marketplace = void 0;
 var marketplace_1 = require("./marketplace");
-Object.defineProperty(exports, "MarketplaceV1", { enumerable: true, get: function () { return marketplace_1.MarketplaceV1; } });
-exports.MarketplaceV2Types = __importStar(require("./marketplaceV2Types"));
-exports.MarketplaceV3Types = __importStar(require("./marketplaceV3Types"));
+Object.defineProperty(exports, "Marketplace", { enumerable: true, get: function () { return __importDefault(marketplace_1).default; } });
 exports.MarketplaceTypes = __importStar(require("./marketplaceTypes"));

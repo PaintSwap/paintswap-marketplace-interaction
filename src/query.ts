@@ -2,23 +2,18 @@
 /* eslint-disable no-console */
 
 import { ethers } from 'ethers'
-import { MarketplaceV3 } from './lib'
+import { Marketplace } from './lib'
 
-const provider = new ethers.providers.JsonRpcProvider('https://rpc.ftm.tools/')
+const RPC = 'https://rpc.soniclabs.com'
+const provider = new ethers.providers.JsonRpcProvider(RPC)
 
-const marketplace = new MarketplaceV3(provider)
-
-const QueryID = 300000 // https://paintswap.finance/marketplace/300000
+const marketplace = new Marketplace(provider)
 
 marketplace.getNextMarketplaceId().then((next: ethers.BigNumber) => {
   const current = next.sub(1)
-  console.log(`The latest sale on the marketplace is ID ${current} : https://paintswap.finance/marketplace/${current}`)
-})
+  console.log(`The latest listing on the marketplace is ID ${current} : https://paintswap.io/sonic/${current}`)
 
-marketplace.getSaleDetails(ethers.BigNumber.from(QueryID)).then((details) => {
-  console.log(`Sale details for sale ${QueryID}:\n`, details)
-})
-
-marketplace.getNextMinimumBid(ethers.BigNumber.from(QueryID)).then((next) => {
-  console.log(`Next minimum bid for sale ${QueryID}: `, `${ethers.utils.formatEther(next.toString())} $FTM`)
+  marketplace.getSaleDetails(ethers.BigNumber.from(current)).then((details) => {
+    console.log(`Sale details for sale ${current}:\n`, details)
+  })
 })

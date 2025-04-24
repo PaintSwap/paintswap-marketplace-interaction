@@ -26,21 +26,13 @@ yarn query
 
 ## @paintswap/marketplace-interactions
 
-Types for fantom are defined in [marketplaceV3Types](./src/lib/marketplaceV3Types.ts).
+Types for Sonic are defined in [marketplaceTypes](./src/lib/marketplaceTypes.ts).
 
-[MarketplaceV3](./src/lib/marketplaceV3.ts) defines a typescript-enabled wrapper around the events and getters of the main contract to make it simpler to use.
+[Marketplace](./src/lib/marketplace.ts) defines a typescript-enabled wrapper around the events and getters of the main contract to make it simpler to use.
 
-Scripts [listen.ts](./src/listen.ts) and [query.ts](./src/query.ts) provide examples of interactions all functions defined by the `MarketplaceV3` class.
+Scripts [listen.ts](./src/listen.ts) and [query.ts](./src/query.ts) provide examples of interactions all functions defined by the `Marketplace` class.
 
 Script [filter.ts](./src/filter.ts) is more advanced and provides an example on building a `queryFilter` to retrieve past events. Great for testing without having to wait for new events!
-
-Types for all other chains are defined in [marketplaceV1Types](./src/lib/marketplaceV1Types.ts).
-
-[MarketplaceV1](./src/lib/marketplaceV1.ts) defines a typescript-enabled wrapper around the events and getters of the main contract to make it simpler to use.
-
-Scripts [listenNew.ts](./src/listen.ts) and [queryNew.ts](./src/query.ts) provide examples of interactions all functions defined by the `MarketplaceV1` class.
-
-Script [filterNew.ts](./src/filter.ts) is more advanced and provides an example on building a `queryFilter` to retrieve past events. Great for testing without having to wait for new events!
 
 ### Use in your own scripts
 
@@ -49,13 +41,13 @@ First, include `@paintswap/marketplace-interactions` in your `package.json`.
 As an example if you'd like to subscribe to Sold events:
 
 ```ts
-import { MarketplaceV3 } from '@paintswap/marketplace-interactions';
+import { Marketplace } from '@paintswap/marketplace-interactions';
 
 const provider = new ethers.providers.JsonRpcProvider(
-  "https://rpc.ftm.tools/"
+  "https://rpc.soniclabs.com/"
 );
 
-const marketplace = new MarketplaceV3(provider)
+const marketplace = new Marketplace(provider)
 
 v3.onSold((sale) => console.log(sale))
 ```

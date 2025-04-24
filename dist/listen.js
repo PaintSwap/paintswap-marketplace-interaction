@@ -4,10 +4,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const ethers_1 = require("ethers");
 const lib_1 = require("./lib");
-const provider = new ethers_1.ethers.providers.JsonRpcProvider('https://rpc.ftm.tools/');
-const marketplace = new lib_1.MarketplaceV3(provider);
+const RPC = 'https://rpc.soniclabs.com';
+const provider = new ethers_1.ethers.providers.JsonRpcProvider(RPC);
+const marketplace = new lib_1.Marketplace(provider);
 marketplace.onNewListing((sale) => {
     console.log('New listing!\n', sale);
+});
+marketplace.onNewListingBatch((sales) => {
+    console.log('New listing batch!\n', sales);
 });
 marketplace.onSold((sale) => {
     console.log('Sold!\n', sale);
@@ -20,9 +24,6 @@ marketplace.onCancelled((sale) => {
 });
 marketplace.onPriceUpdate((sale) => {
     console.log('Price updated\n', sale);
-});
-marketplace.onStartDelayed((delay) => {
-    console.log('Sale start delayed\n', delay);
 });
 marketplace.onDurationExtended((extension) => {
     console.log('Auction duration extended\n', extension);

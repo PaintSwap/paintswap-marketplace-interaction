@@ -12,12 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MarketplaceV1 = exports.MarketplaceAddress = exports.MarketplaceABI = void 0;
+exports.Marketplace = exports.MarketplaceAddress = exports.MarketplaceABI = void 0;
 const ethers_1 = require("ethers");
 const PaintSwapMarketplace_json_1 = __importDefault(require("../abi/PaintSwapMarketplace.json"));
 exports.MarketplaceABI = PaintSwapMarketplace_json_1.default;
-exports.MarketplaceAddress = '0xeb8E5876Eb79c628929944dDf3521Ad893d57827';
-class MarketplaceV1 {
+exports.MarketplaceAddress = '0x0c558365eeff4b057fdbed91bc3650e1a00018b4'; // Sonic Mainnet
+class Marketplace {
     /**
      * @param providerOrSigner an ethers compatible provider or signer https://docs.ethers.io/v5/api/providers/
      * @param address if given, overrides the default marketplace contract address
@@ -230,5 +230,5 @@ class MarketplaceV1 {
         });
     }
 }
-exports.MarketplaceV1 = MarketplaceV1;
-exports.default = MarketplaceV1;
+exports.Marketplace = Marketplace;
+exports.default = Marketplace;

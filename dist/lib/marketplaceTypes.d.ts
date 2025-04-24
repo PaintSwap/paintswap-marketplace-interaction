@@ -112,7 +112,7 @@ export interface NewBid {
     nextMinimum: BigNumber;
     event?: ethers.Event;
 }
-export type SaleDetails = {
+export declare type SaleDetails = {
     nft: string;
     tokenId: BigNumber;
     endTime: Number;
