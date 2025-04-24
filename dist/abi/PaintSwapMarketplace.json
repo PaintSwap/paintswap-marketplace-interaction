@@ -1,0 +1,3560 @@
+[
+    {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "target",
+                "type": "address"
+            }
+        ],
+        "name": "AddressEmptyCode",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "AllowanceInsufficient",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "AuctionsMustUseVault",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "BalanceInsufficient",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "CannotAcceptOwnOffer",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "CannotBuyAuction",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "CannotBuyFromSelf",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "CannotCancelAuction",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "CannotDonateToSelf",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "CannotEditAuctionPrice",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "CannotEditAuctionQuantity",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            }
+        ],
+        "name": "CoinTransferFailed",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "DurationsLengthMismatch",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "implementation",
+                "type": "address"
+            }
+        ],
+        "name": "ERC1967InvalidImplementation",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ERC1967NonPayable",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "FailedCall",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "InsufficientPayment",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "InvalidAuctionDuration",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "InvalidAuctionType",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "InvalidDonationPercent",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "InvalidDuration",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "InvalidInitialization",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "enum PaintSwapMarketplaceBase.OfferType",
+                "name": "offerType",
+                "type": "uint8"
+            }
+        ],
+        "name": "InvalidOfferType",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "InvalidPrice",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "InvalidQuantity",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "IsNotYourListing",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "LengthMismatch",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ListingDoesNotExist",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ListingDoesNotHaveVault",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "expires",
+                "type": "uint256"
+            }
+        ],
+        "name": "ListingExpired",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ListingHasFinished",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ListingNotAnAction",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "MaxCannotBeLessThanMin",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "MinCannotBeZero",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "MustHaveMarketplaceIds",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NFTMismatch",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NftAddressZero",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NftsRequired",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NoListingsToAdd",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NoOffers",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NoneExpected",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotEnoughRemaining",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotInitializing",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "NotTheSeller",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "offerId",
+                "type": "uint256"
+            }
+        ],
+        "name": "OfferDoesNotExist",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "expires",
+                "type": "uint256"
+            }
+        ],
+        "name": "OfferHasExpired",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "OfferIdsRequired",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "OfferIsOnSale",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "OfferMustMatchExpected",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "OfferMustMatchListing",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "OfferNotForThisListing",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "OfferNotFromSender",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            }
+        ],
+        "name": "OwnableInvalidOwner",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "OwnableUnauthorizedAccount",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "PriceInsufficient",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "PricesLengthMismatch",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "QuantitiesLengthMismatch",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "QuantityTooHigh",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "QuantityUnchanged",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "ReentrancyGuardReentrantCall",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "SaleHasFinished",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "SaleHasRemainingAmount",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "SaleIsAuction",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "SaleIsNotAuction",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "SaleNotFinished",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "SearchKeywordsLengthMismatch",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "SearchKeywordsTooLong",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "TokenIdMismatch",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "TokenIdNotFound",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "TokenIdsLengthMismatch",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "TokenIdsNotSorted",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "TokenTransferNotSuccessful",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "TooManyOffers",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "TooManySearchKeywords",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "total",
+                "type": "uint256"
+            }
+        ],
+        "name": "TotalNotExpected",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "UUPSUnauthorizedCallContext",
+        "type": "error"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bytes32",
+                "name": "slot",
+                "type": "bytes32"
+            }
+        ],
+        "name": "UUPSUnsupportedProxiableUUID",
+        "type": "error"
+    },
+    {
+        "inputs": [],
+        "name": "VaultCreationFailed",
+        "type": "error"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "callGasLimit",
+                "type": "uint256"
+            }
+        ],
+        "name": "CallGasLimitInfo",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            }
+        ],
+        "name": "CancelledListing",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            }
+        ],
+        "name": "CompleteSwap",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint64",
+                "name": "version",
+                "type": "uint64"
+            }
+        ],
+        "name": "Initialized",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint96",
+                "name": "listingFee",
+                "type": "uint96"
+            }
+        ],
+        "name": "ListingFeeInfo",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "maxRoyalty",
+                "type": "uint256"
+            }
+        ],
+        "name": "MaxRoyaltyInfo",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "bidder",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint96",
+                "name": "bid",
+                "type": "uint96"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint96",
+                "name": "nextMinimum",
+                "type": "uint96"
+            }
+        ],
+        "name": "NewBid",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "offerId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint96",
+                "name": "price",
+                "type": "uint96"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "expires",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "searchKeywords",
+                "type": "string"
+            }
+        ],
+        "name": "NewCollectionOffer",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "offerId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256[]",
+                "name": "tokenIds",
+                "type": "uint256[]"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint96",
+                "name": "price",
+                "type": "uint96"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint96[]",
+                "name": "prices",
+                "type": "uint96[]"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint40",
+                "name": "expires",
+                "type": "uint40"
+            },
+            {
+                "indexed": false,
+                "internalType": "string[]",
+                "name": "searchKeywords",
+                "type": "string[]"
+            }
+        ],
+        "name": "NewFilteredCollectionOffer",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint96",
+                        "name": "price",
+                        "type": "uint96"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "duration",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "amount",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isUsingVault",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isAntisnipe",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isFlashAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isNSFW",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "searchKeywords",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "donationAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint16",
+                        "name": "donationPercent",
+                        "type": "uint16"
+                    }
+                ],
+                "indexed": false,
+                "internalType": "struct Listing",
+                "name": "listing",
+                "type": "tuple"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "seller",
+                "type": "address"
+            }
+        ],
+        "name": "NewListing",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "firstMarketplaceId",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint96",
+                        "name": "price",
+                        "type": "uint96"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "duration",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "amount",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isUsingVault",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isAntisnipe",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isFlashAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isNSFW",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "searchKeywords",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "donationAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint16",
+                        "name": "donationPercent",
+                        "type": "uint16"
+                    }
+                ],
+                "indexed": false,
+                "internalType": "struct Listing[]",
+                "name": "listings",
+                "type": "tuple[]"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "seller",
+                "type": "address"
+            }
+        ],
+        "name": "NewListingBatch",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "offerId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint96",
+                "name": "price",
+                "type": "uint96"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "expires",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "searchKeywords",
+                "type": "string"
+            }
+        ],
+        "name": "NewOffer",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint96",
+                        "name": "price",
+                        "type": "uint96"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "duration",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "amount",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isUsingVault",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isAntisnipe",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isFlashAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isNSFW",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "searchKeywords",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "donationAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint16",
+                        "name": "donationPercent",
+                        "type": "uint16"
+                    }
+                ],
+                "indexed": false,
+                "internalType": "struct Listing",
+                "name": "listing",
+                "type": "tuple"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "seller",
+                "type": "address"
+            }
+        ],
+        "name": "NewTempListing",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "offerId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            }
+        ],
+        "name": "OfferAccepted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "offerId",
+                "type": "uint256"
+            }
+        ],
+        "name": "OfferCompleted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "offerId",
+                "type": "uint256"
+            }
+        ],
+        "name": "OfferExpired",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "offerId",
+                "type": "uint256"
+            }
+        ],
+        "name": "OfferRemoved",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "previousOwner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "OwnershipTransferred",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "swapMaxNFTs",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "swapCostNative",
+                "type": "uint256"
+            }
+        ],
+        "name": "P2PValues",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            }
+        ],
+        "name": "RejectSwap",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            }
+        ],
+        "name": "RemoveExpiredListing",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            }
+        ],
+        "name": "SaleFinished",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "amount",
+                        "type": "uint256"
+                    }
+                ],
+                "indexed": false,
+                "internalType": "struct PaintSwapMarketplaceBase.Item[]",
+                "name": "offeringItems",
+                "type": "tuple[]"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "offeringFTM",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "amount",
+                        "type": "uint256"
+                    }
+                ],
+                "indexed": false,
+                "internalType": "struct PaintSwapMarketplaceBase.Item[]",
+                "name": "expectingItems",
+                "type": "tuple[]"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "expectingFTM",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint40",
+                "name": "expires",
+                "type": "uint40"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "searchKeywords",
+                "type": "string"
+            }
+        ],
+        "name": "SetUpSwap",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint96",
+                "name": "price",
+                "type": "uint96"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "buyer",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint40",
+                "name": "amount",
+                "type": "uint40"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "offerId",
+                "type": "uint256"
+            }
+        ],
+        "name": "Sold",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "TokenFailedTransfer",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint40",
+                "name": "endTime",
+                "type": "uint40"
+            }
+        ],
+        "name": "UpdateEndTime",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "offerId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint96",
+                "name": "newPrice",
+                "type": "uint96"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint40",
+                "name": "expires",
+                "type": "uint40"
+            }
+        ],
+        "name": "UpdateOffer",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint96",
+                "name": "price",
+                "type": "uint96"
+            }
+        ],
+        "name": "UpdatePrice",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint40",
+                "name": "newAmountRemaining",
+                "type": "uint40"
+            }
+        ],
+        "name": "UpdateQuantity",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "implementation",
+                "type": "address"
+            }
+        ],
+        "name": "Upgraded",
+        "type": "event"
+    },
+    {
+        "inputs": [],
+        "name": "UPGRADE_INTERFACE_VERSION",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "acceptOfferId",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct NFT",
+                "name": "expectedNFT",
+                "type": "tuple"
+            },
+            {
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "internalType": "string",
+                "name": "searchKeywords",
+                "type": "string"
+            },
+            {
+                "internalType": "uint96",
+                "name": "expectedTotal",
+                "type": "uint96"
+            }
+        ],
+        "name": "acceptOffer",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "uint256",
+                        "name": "offerId",
+                        "type": "uint256"
+                    },
+                    {
+                        "components": [
+                            {
+                                "internalType": "address",
+                                "name": "nft",
+                                "type": "address"
+                            },
+                            {
+                                "internalType": "uint256",
+                                "name": "tokenId",
+                                "type": "uint256"
+                            }
+                        ],
+                        "internalType": "struct NFT",
+                        "name": "expectedNFT",
+                        "type": "tuple"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "marketplaceId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "quantity",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "searchKeywords",
+                        "type": "string"
+                    }
+                ],
+                "internalType": "struct PaintSwapMarketplaceBase.OfferInfo[]",
+                "name": "offerInfos",
+                "type": "tuple[]"
+            },
+            {
+                "internalType": "uint96",
+                "name": "expectedTotal",
+                "type": "uint96"
+            }
+        ],
+        "name": "acceptOfferBatch",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "acceptOfferId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct NFT",
+                "name": "expectedNFT",
+                "type": "tuple"
+            },
+            {
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint96",
+                "name": "expectedTotal",
+                "type": "uint96"
+            }
+        ],
+        "name": "acceptOnSaleOffer",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "tokenIds",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "amounts",
+                        "type": "uint256[]"
+                    }
+                ],
+                "internalType": "struct IPaintSwapMarketplaceP2PSwaps.Items[]",
+                "name": "offeringNFTs",
+                "type": "tuple[]"
+            },
+            {
+                "internalType": "uint128",
+                "name": "offeringNative",
+                "type": "uint128"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "tokenIds",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "amounts",
+                        "type": "uint256[]"
+                    }
+                ],
+                "internalType": "struct IPaintSwapMarketplaceP2PSwaps.Items[]",
+                "name": "expectingNFTs",
+                "type": "tuple[]"
+            },
+            {
+                "internalType": "uint128",
+                "name": "expectingNative",
+                "type": "uint128"
+            },
+            {
+                "internalType": "bool",
+                "name": "useAvailableWFTM",
+                "type": "bool"
+            }
+        ],
+        "name": "acceptSwap",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint96",
+                        "name": "price",
+                        "type": "uint96"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "duration",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "amount",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isUsingVault",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isAntisnipe",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isFlashAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isNSFW",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "searchKeywords",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "donationAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint16",
+                        "name": "donationPercent",
+                        "type": "uint16"
+                    }
+                ],
+                "internalType": "struct Listing",
+                "name": "listing",
+                "type": "tuple"
+            }
+        ],
+        "name": "addListing",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint96",
+                        "name": "price",
+                        "type": "uint96"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "duration",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "amount",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isUsingVault",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isAntisnipe",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isFlashAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isNSFW",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "searchKeywords",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "donationAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint16",
+                        "name": "donationPercent",
+                        "type": "uint16"
+                    }
+                ],
+                "internalType": "struct Listing[]",
+                "name": "listings",
+                "type": "tuple[]"
+            }
+        ],
+        "name": "addListingBatch",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint96",
+                "name": "price",
+                "type": "uint96"
+            },
+            {
+                "internalType": "uint40",
+                "name": "duration",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint40",
+                "name": "amount",
+                "type": "uint40"
+            },
+            {
+                "internalType": "bool",
+                "name": "isVaultListing",
+                "type": "bool"
+            },
+            {
+                "internalType": "bool",
+                "name": "isAuctionListing",
+                "type": "bool"
+            },
+            {
+                "internalType": "bool",
+                "name": "isAntisnipe",
+                "type": "bool"
+            },
+            {
+                "internalType": "bool",
+                "name": "isFlashAuction",
+                "type": "bool"
+            },
+            {
+                "internalType": "bool",
+                "name": "isNSFW",
+                "type": "bool"
+            },
+            {
+                "internalType": "string",
+                "name": "searchKeywords",
+                "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "donationAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint16",
+                "name": "donationPercent",
+                "type": "uint16"
+            }
+        ],
+        "name": "addListingRaw",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "auctionEndTimeIncreaseCutOff",
+        "outputs": [
+            {
+                "internalType": "uint40",
+                "name": "",
+                "type": "uint40"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "auctionGracePeriodForCancelling",
+        "outputs": [
+            {
+                "internalType": "uint40",
+                "name": "",
+                "type": "uint40"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct NFT",
+                "name": "expectedNFT",
+                "type": "tuple"
+            },
+            {
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            }
+        ],
+        "name": "buy",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "marketplaceIds",
+                "type": "uint256[]"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct NFT[]",
+                "name": "expectedNFTs",
+                "type": "tuple[]"
+            },
+            {
+                "internalType": "uint40[]",
+                "name": "quantities",
+                "type": "uint40[]"
+            }
+        ],
+        "name": "buyBatch",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            }
+        ],
+        "name": "cancelListing",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "marketplaceIds",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "cancelListingBatch",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "cancelOfferId",
+                "type": "uint256"
+            }
+        ],
+        "name": "cancelOffer",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "cancelOfferIds",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "cancelOfferBatch",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            }
+        ],
+        "name": "completeMarketplaceEntry",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "currentMarketplaceId",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint40",
+                "name": "newQuantity",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint96",
+                "name": "newOfferPrice",
+                "type": "uint96"
+            },
+            {
+                "internalType": "uint40",
+                "name": "newOfferDuration",
+                "type": "uint40"
+            }
+        ],
+        "name": "editOffer",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "offerIds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "address[]",
+                "name": "nfts",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "tokenIds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint40[]",
+                "name": "newQuantities",
+                "type": "uint40[]"
+            },
+            {
+                "internalType": "uint96[]",
+                "name": "newOfferPrices",
+                "type": "uint96[]"
+            },
+            {
+                "internalType": "uint40[]",
+                "name": "newOfferDurations",
+                "type": "uint40[]"
+            }
+        ],
+        "name": "editOfferBatch",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint96",
+                "name": "price",
+                "type": "uint96"
+            }
+        ],
+        "name": "editPrice",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint96",
+                "name": "newPrice",
+                "type": "uint96"
+            },
+            {
+                "internalType": "uint40",
+                "name": "newQuantity",
+                "type": "uint40"
+            }
+        ],
+        "name": "editPriceAndQuantity",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "marketplaceIds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint96[]",
+                "name": "prices",
+                "type": "uint96[]"
+            }
+        ],
+        "name": "editPriceBatch",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint40",
+                "name": "newQuantity",
+                "type": "uint40"
+            }
+        ],
+        "name": "editQuantity",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256[]",
+                "name": "expireOfferIds",
+                "type": "uint256[]"
+            }
+        ],
+        "name": "expireOffers",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "flashAuctionEndTimeIncreaseCutOff",
+        "outputs": [
+            {
+                "internalType": "uint40",
+                "name": "",
+                "type": "uint40"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "flashAuctionGracePeriodForCancelling",
+        "outputs": [
+            {
+                "internalType": "uint40",
+                "name": "",
+                "type": "uint40"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+            }
+        ],
+        "name": "getOffer",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "expires",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "uint48",
+                        "name": "quantityRemaining",
+                        "type": "uint48"
+                    },
+                    {
+                        "internalType": "enum PaintSwapMarketplaceBase.OfferType",
+                        "name": "offerType",
+                        "type": "uint8"
+                    },
+                    {
+                        "internalType": "address[]",
+                        "name": "nfts",
+                        "type": "address[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "tokenIds",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "uint96[]",
+                        "name": "prices",
+                        "type": "uint96[]"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "from",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint96",
+                        "name": "price",
+                        "type": "uint96"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "marketplaceId",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct PaintSwapMarketplaceBase.Offer",
+                "name": "",
+                "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getSaleDetails",
+        "outputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "endTime",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "uint96",
+                        "name": "price",
+                        "type": "uint96"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "seller",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "isAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "auctionStartTime",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "uint96",
+                        "name": "highestBid",
+                        "type": "uint96"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "highestBidder",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "antisnipe",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "bool",
+                        "name": "flashAuction",
+                        "type": "bool"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "donationAddress",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint16",
+                        "name": "donationPercent",
+                        "type": "uint16"
+                    },
+                    {
+                        "internalType": "uint40",
+                        "name": "amountRemaining",
+                        "type": "uint40"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "vault",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct PaintSwapMarketplaceBase.FullDetails",
+                "name": "",
+                "type": "tuple"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getSingleNFTListings",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getSwapCostNative",
+        "outputs": [
+            {
+                "internalType": "uint128",
+                "name": "",
+                "type": "uint128"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            }
+        ],
+        "name": "getUserCollectionOffersMade",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            }
+        ],
+        "name": "getUserFilteredCollectionOffersMade",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            }
+        ],
+        "name": "getUserOffersMade",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address[]",
+                "name": "nfts",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "tokenIds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            }
+        ],
+        "name": "hasExistingActiveOffers",
+        "outputs": [
+            {
+                "internalType": "bool[]",
+                "name": "",
+                "type": "bool[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "marketplaceWhitelist",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "collectionRoyalties",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "vaultFactory",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implBuyEditListing",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implMakeAndEditOffers",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implBids",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implAcceptOffers",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implListAndComplete",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implBatchTransferNFT",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implP2PSwaps",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "feePercentage",
+                "type": "address"
+            },
+            {
+                "internalType": "uint96",
+                "name": "listingFeeInit",
+                "type": "uint96"
+            },
+            {
+                "internalType": "address",
+                "name": "devFeeAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "salesFeeAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "uint128",
+                "name": "swapCostNative",
+                "type": "uint128"
+            },
+            {
+                "internalType": "uint256",
+                "name": "startId",
+                "type": "uint256"
+            }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "listingFee",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct NFT",
+                "name": "expectedNFT",
+                "type": "tuple"
+            },
+            {
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint96",
+                "name": "bid",
+                "type": "uint96"
+            }
+        ],
+        "name": "makeBid",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint96",
+                "name": "price",
+                "type": "uint96"
+            },
+            {
+                "internalType": "uint40",
+                "name": "duration",
+                "type": "uint40"
+            },
+            {
+                "internalType": "string",
+                "name": "searchKeywords",
+                "type": "string"
+            }
+        ],
+        "name": "makeCollectionOffer",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "tokenIds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint96[]",
+                "name": "prices",
+                "type": "uint96[]"
+            },
+            {
+                "internalType": "uint40",
+                "name": "duration",
+                "type": "uint40"
+            },
+            {
+                "internalType": "string[]",
+                "name": "searchKeywords",
+                "type": "string[]"
+            }
+        ],
+        "name": "makeFilteredCollectionOffer",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address[]",
+                "name": "nfts",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256[][]",
+                "name": "tokenIds",
+                "type": "uint256[][]"
+            },
+            {
+                "internalType": "uint40[]",
+                "name": "quantities",
+                "type": "uint40[]"
+            },
+            {
+                "internalType": "uint96[][]",
+                "name": "prices",
+                "type": "uint96[][]"
+            },
+            {
+                "internalType": "uint40[]",
+                "name": "durations",
+                "type": "uint40[]"
+            },
+            {
+                "internalType": "string[][]",
+                "name": "searchKeywords",
+                "type": "string[][]"
+            }
+        ],
+        "name": "makeFilteredCollectionOfferBatch",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256",
+                        "name": "tokenId",
+                        "type": "uint256"
+                    }
+                ],
+                "internalType": "struct NFT",
+                "name": "expectedNFT",
+                "type": "tuple"
+            },
+            {
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint96",
+                "name": "price",
+                "type": "uint96"
+            },
+            {
+                "internalType": "uint40",
+                "name": "duration",
+                "type": "uint40"
+            }
+        ],
+        "name": "makeOffer",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "nft",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "tokenId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint40",
+                "name": "quantity",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint96",
+                "name": "price",
+                "type": "uint96"
+            },
+            {
+                "internalType": "uint40",
+                "name": "duration",
+                "type": "uint40"
+            },
+            {
+                "internalType": "string",
+                "name": "searchKeywords",
+                "type": "string"
+            }
+        ],
+        "name": "makeOfferSingle",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address[]",
+                "name": "nfts",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "tokenIds",
+                "type": "uint256[]"
+            },
+            {
+                "internalType": "uint40[]",
+                "name": "quantities",
+                "type": "uint40[]"
+            },
+            {
+                "internalType": "uint96[]",
+                "name": "prices",
+                "type": "uint96[]"
+            },
+            {
+                "internalType": "uint40[]",
+                "name": "durations",
+                "type": "uint40[]"
+            },
+            {
+                "internalType": "string[]",
+                "name": "searchKeywords",
+                "type": "string[]"
+            }
+        ],
+        "name": "makeOfferSingleBatch",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "maxDuration",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "maxOfferDuration",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "minAuctionDuration",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "minDuration",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "minFlashAuctionDuration",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "minOfferDuration",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "marketplaceId",
+                "type": "uint256"
+            }
+        ],
+        "name": "nextMinimumBid",
+        "outputs": [
+            {
+                "internalType": "uint96",
+                "name": "",
+                "type": "uint96"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            }
+        ],
+        "name": "offerCounts",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "offerCount",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "offerId",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "proxiableUUID",
+        "outputs": [
+            {
+                "internalType": "bytes32",
+                "name": "",
+                "type": "bytes32"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            }
+        ],
+        "name": "rejectSwap",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "renounceOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "tokenIds",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "amounts",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "to",
+                        "type": "address"
+                    }
+                ],
+                "internalType": "struct PaintSwapMarketplaceBase.BulkTransferInfo[]",
+                "name": "nftsInfo",
+                "type": "tuple[]"
+            },
+            {
+                "internalType": "uint256",
+                "name": "chainId",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "destination",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+            }
+        ],
+        "name": "safeNFTTransferBulkOrdered",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "min",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "max",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "minAuction",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "minFlashAuction",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "maxAuction",
+                "type": "uint256"
+            }
+        ],
+        "name": "setDurations",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "bool",
+                "name": "enable",
+                "type": "bool"
+            }
+        ],
+        "name": "setEnableSelling",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "dev",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "salesFee",
+                "type": "address"
+            }
+        ],
+        "name": "setFeeAddresses",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "feePercentage",
+                "type": "address"
+            }
+        ],
+        "name": "setFeePercentage",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "implBuyEditListing",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implMakeAndEditOffers",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implBids",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implAcceptOffers",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implListAndComplete",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implBatchTransferNFT",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "implP2PSwaps",
+                "type": "address"
+            }
+        ],
+        "name": "setImpls",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint96",
+                "name": "newListingFee",
+                "type": "uint96"
+            }
+        ],
+        "name": "setListingFee",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "maxActiveOfferCount",
+                "type": "uint256"
+            }
+        ],
+        "name": "setMaxActiveOfferCount",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "callGasLimit",
+                "type": "uint256"
+            }
+        ],
+        "name": "setMaxCallGasLimit",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_maxRoyalty",
+                "type": "uint256"
+            }
+        ],
+        "name": "setMaxRoyalty",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "min",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "max",
+                "type": "uint256"
+            }
+        ],
+        "name": "setOfferDuration",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint128",
+                "name": "swapCostNative",
+                "type": "uint128"
+            }
+        ],
+        "name": "setSwapCostNative",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "tokenIds",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "amounts",
+                        "type": "uint256[]"
+                    }
+                ],
+                "internalType": "struct IPaintSwapMarketplaceP2PSwaps.Items[]",
+                "name": "offeringNFTs",
+                "type": "tuple[]"
+            },
+            {
+                "internalType": "uint128",
+                "name": "offeringNative",
+                "type": "uint128"
+            },
+            {
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "components": [
+                    {
+                        "internalType": "address",
+                        "name": "nft",
+                        "type": "address"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "tokenIds",
+                        "type": "uint256[]"
+                    },
+                    {
+                        "internalType": "uint256[]",
+                        "name": "amounts",
+                        "type": "uint256[]"
+                    }
+                ],
+                "internalType": "struct IPaintSwapMarketplaceP2PSwaps.Items[]",
+                "name": "expectingNFTs",
+                "type": "tuple[]"
+            },
+            {
+                "internalType": "uint128",
+                "name": "expectingNative",
+                "type": "uint128"
+            },
+            {
+                "internalType": "uint40",
+                "name": "duration",
+                "type": "uint40"
+            },
+            {
+                "internalType": "string",
+                "name": "searchKeywords",
+                "type": "string"
+            }
+        ],
+        "name": "setUpSwap",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint40",
+                "name": "auctionCancellingGracePeriod",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint40",
+                "name": "flashAuctionCancellingGracePeriod",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint40",
+                "name": "auctionCutOffEndTimeIncrease",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint40",
+                "name": "flashAuctionCutOffEndTimeIncrease",
+                "type": "uint40"
+            },
+            {
+                "internalType": "uint96",
+                "name": "minIncreasedBidPercent",
+                "type": "uint96"
+            }
+        ],
+        "name": "setVariousTimes",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
+            }
+        ],
+        "name": "transferOwnership",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "newImplementation",
+                "type": "address"
+            },
+            {
+                "internalType": "bytes",
+                "name": "data",
+                "type": "bytes"
+            }
+        ],
+        "name": "upgradeToAndCall",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "stateMutability": "payable",
+        "type": "receive"
+    }
+]

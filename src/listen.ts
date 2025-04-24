@@ -2,14 +2,19 @@
 /* eslint-disable no-console */
 
 import { ethers } from 'ethers'
-import { MarketplaceV3 } from './lib'
+import { Marketplace } from './lib'
 
-const provider = new ethers.providers.JsonRpcProvider('https://rpc.ftm.tools/')
+const RPC = 'https://rpc.soniclabs.com'
+const provider = new ethers.providers.JsonRpcProvider(RPC)
 
-const marketplace = new MarketplaceV3(provider)
+const marketplace = new Marketplace(provider)
 
 marketplace.onNewListing((sale) => {
   console.log('New listing!\n', sale)
+})
+
+marketplace.onNewListingBatch((sales) => {
+  console.log('New listing batch!\n', sales)
 })
 
 marketplace.onSold((sale) => {
@@ -26,10 +31,6 @@ marketplace.onCancelled((sale) => {
 
 marketplace.onPriceUpdate((sale) => {
   console.log('Price updated\n', sale)
-})
-
-marketplace.onStartDelayed((delay) => {
-  console.log('Sale start delayed\n', delay)
 })
 
 marketplace.onDurationExtended((extension) => {
