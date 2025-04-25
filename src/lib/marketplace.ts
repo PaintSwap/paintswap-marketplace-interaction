@@ -116,7 +116,7 @@ export class Marketplace {
    * @param callback called for cancelled sales
    */
   onCancelled(callback: (bundle: Cancelled) => void): void {
-    this.contract.on('CancelledSale', (...args: any) => {
+    this.contract.on('CancelledListing', (...args: any) => {
       const event = args.slice(-1)[0]
       callback(this.handleCancelled(event.args, event))
     })
