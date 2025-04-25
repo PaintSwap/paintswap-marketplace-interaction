@@ -42,6 +42,7 @@ As an example if you'd like to subscribe to Sold events:
 
 ```ts
 import { Marketplace } from '@paintswap/marketplace-interactions';
+import { ethers } from 'ethers'
 
 const provider = new ethers.providers.JsonRpcProvider(
   "https://rpc.soniclabs.com/"
@@ -49,7 +50,7 @@ const provider = new ethers.providers.JsonRpcProvider(
 
 const marketplace = new Marketplace(provider)
 
-v3.onSold((sale) => console.log(sale))
+marketplace.onSold((sale) => console.log(sale))
 ```
 
 ### Reliability and Guarantees
